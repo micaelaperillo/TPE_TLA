@@ -14,4 +14,4 @@ La nomenclatura para los autómatas en dos dimensiones será la siguiente: A/D/B
     B: Cantidad de vecinos vivos para que una célula nazca en una celda vacía
     V: Regla de vecindad, podra ser Moore (M), Von Neumann (VN) o creada por el usuario (U) y el rango especificado. Por ejemplo. M(2) es la distancia de Moore con rango dos. 
     
-La extensión de los archivos será .cal9000.
+La extensión de los archivos será .CAL9K.
