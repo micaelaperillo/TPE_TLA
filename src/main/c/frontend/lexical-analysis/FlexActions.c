@@ -88,3 +88,80 @@ Token UnknownLexemeAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
 	_logLexicalAnalyzerContext(__FUNCTION__, lexicalAnalyzerContext);
 	return UNKNOWN;
 }
+
+void checkLexemeAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+
+}
+
+void openParenthesisLexemeAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+	
+}
+
+void closeParenthesisLexemeAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+	
+}
+
+void integerLexemeAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+	
+}
+
+void ignoredLexemeAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+	
+}
+
+void unknownLexemeAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+	
+}
+
+void automataFunctionAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+	
+}
+
+void colonPatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+	
+}
+
+void commaPatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+	
+}
+
+void semicolonPatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+	
+}
+
+void endAutomataFunctionAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+	
+}
+
+void ruleFunctionAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+	
+}
+
+void endRuleFunctionAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+	
+}
+
+
+void colorSetupAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+	
+}
+
+void colorHandlerAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+	
+}
+
+void bgColorSetupAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+	
+}
+
+void wrappingSetupAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+	
+}
+
+void truePatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+	
+}
+
+void falsePatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+	
+}

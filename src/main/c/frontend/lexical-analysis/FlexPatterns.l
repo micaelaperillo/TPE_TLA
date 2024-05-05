@@ -36,33 +36,33 @@ color #[a-f|A-F|0-9]{6}
 
 
 
-"check"                          { return CheckLexemeAction(createLexicalAnalyzerContext()); }   
+"check"                          { return checkLexemeAction(createLexicalAnalyzerContext()); }   
 
 "("									{ return openParenthesisPatternAction(createLexicalAnalyzerContext()); }
 ")"									{ return closeParenthesisPatternAction(createLexicalAnalyzerContext()); }
 
-[[:digit:]]+						{ return IntegerLexemeAction(createLexicalAnalyzerContext()); }
+[[:digit:]]+						{ return integerLexemeAction(createLexicalAnalyzerContext()); }
 
-[[:space:]]+						{ IgnoredLexemeAction(createLexicalAnalyzerContext()); }
-.									{ return UnknownLexemeAction(createLexicalAnalyzerContext()); }
+[[:space:]]+						{ ignoredLexemeAction(createLexicalAnalyzerContext()); }
+.									{ return unknownLexemeAction(createLexicalAnalyzerContext()); }
 
 "automata" {return automataFunctionAction(createLexicalAnalyzerContext()); }
 "automatan't" {return endAutomataFunctionAction(createLexicalAnalyzerContext()); }
 
 
 
-"rule" { return beginRuleFuncionAction(createLexicalAnalyzerContext()); }
+"rule" { return ruleFuncionAction(createLexicalAnalyzerContext()); }
 ":" { return colonPatternAction(createLexicalAnalyzerContext()); }
 ";" { return semicolonPatternAction(createLexicalAnalyzerContext()); }
 "rulen't" {return endRuleFunctionAction(createLexicalAnalyzerContext()); }
 
-"color" { return colorSetupRuleAction(createLexicalAnalyzerContext()); }
+"color" { return colorSetupAction(createLexicalAnalyzerContext()); }
 {color} { return colorHandlerAction(createLexicalAnalyzerContext()); }
 "," { return commaPatternAction(createLexicalAnalyzerContext()); }
 
-"bgColor" { return bgColorSetupRuleAction(createLexicalAnalyzerContext()); }
+"bgColor" { return bgColorSetupAction(createLexicalAnalyzerContext()); }
 
-"wrapping" { return wrappingSetupRuleAction(createLexicalAnalyzerContext()); }
+"wrapping" { return wrappingSetupAction(createLexicalAnalyzerContext()); }
 "true" { return truePatternAction(createLexicalAnalyzerContext()); }
 "false" { return falsePatternAction(createLexicalAnalyzerContext()); }
 %%

@@ -13,6 +13,8 @@
 	Token token;
 
 	/** Non-terminals. */
+	Automata* automata;
+	Check* check;
 
 	Constant * constant;
 	Expression * expression;
@@ -42,7 +44,8 @@
 %token <token> MUL
 %token <token> OPEN_PARENTHESIS
 %token <token> SUB
-
+%token <token> AUTOMATA
+%token <token> AUTOMATA_NT
 %token <token> UNKNOWN
 
 /** Non-terminals. */
@@ -50,7 +53,7 @@
 %type <expression> expression
 %type <factor> factor
 %type <program> program
-
+%type <check> check
 /**
  * Precedence and associativity.
  *
@@ -77,5 +80,6 @@ factor: OPEN_PARENTHESIS expression CLOSE_PARENTHESIS				{ $$ = ExpressionFactor
 
 constant: INTEGER													{ $$ = IntegerConstantSemanticAction($1); }
 	;
+
 
 %%
