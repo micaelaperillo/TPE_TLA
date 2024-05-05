@@ -16,12 +16,15 @@
  */
 %x MULTILINE_COMMENT
 
+
 /**
  * Reusable patterns.
  *
  * @see https://westes.github.io/flex/manual/Matching.html
  * @see https://westes.github.io/flex/manual/Patterns.html
  */
+
+color #[a-f|A-F|0-9]{6}
 
 %%
 
@@ -31,19 +34,37 @@
 <MULTILINE_COMMENT>[^*]+			{ IgnoredLexemeAction(createLexicalAnalyzerContext()); }
 <MULTILINE_COMMENT>.				{ IgnoredLexemeAction(createLexicalAnalyzerContext()); }
 
-"-"									{ return ArithmeticOperatorLexemeAction(createLexicalAnalyzerContext()); }
-"*"									{ return ArithmeticOperatorLexemeAction(createLexicalAnalyzerContext()); }
-"/"									{ return ArithmeticOperatorLexemeAction(createLexicalAnalyzerContext()); }
-"+"									{ return ArithmeticOperatorLexemeAction(createLexicalAnalyzerContext()); }
 
-"("									{ return ParenthesisLexemeAction(createLexicalAnalyzerContext()); }
-")"									{ return ParenthesisLexemeAction(createLexicalAnalyzerContext()); }
+
+"check"                          { return CheckLexemeAction(createLexicalAnalyzerContext()); }   
+
+"("									{ return openParenthesisPatternAction(createLexicalAnalyzerContext()); }
+")"									{ return closeParenthesisPatternAction(createLexicalAnalyzerContext()); }
 
 [[:digit:]]+						{ return IntegerLexemeAction(createLexicalAnalyzerContext()); }
 
 [[:space:]]+						{ IgnoredLexemeAction(createLexicalAnalyzerContext()); }
 .									{ return UnknownLexemeAction(createLexicalAnalyzerContext()); }
 
+"automata" {return automataFunctionAction(createLexicalAnalyzerContext()); }
+"automatan't" {return endAutomataFunctionAction(createLexicalAnalyzerContext()); }
+
+
+
+"rule" { return beginRuleFuncionAction(createLexicalAnalyzerContext()); }
+":" { return colonPatternAction(createLexicalAnalyzerContext()); }
+";" { return semicolonPatternAction(createLexicalAnalyzerContext()); }
+"rulen't" {return endRuleFunctionAction(createLexicalAnalyzerContext()); }
+
+"color" { return colorSetupRuleAction(createLexicalAnalyzerContext()); }
+{color} { return colorHandlerAction(createLexicalAnalyzerContext()); }
+"," { return commaPatternAction(createLexicalAnalyzerContext()); }
+
+"bgColor" { return bgColorSetupRuleAction(createLexicalAnalyzerContext()); }
+
+"wrapping" { return wrappingSetupRuleAction(createLexicalAnalyzerContext()); }
+"true" { return truePatternAction(createLexicalAnalyzerContext()); }
+"false" { return falsePatternAction(createLexicalAnalyzerContext()); }
 %%
 
 #include "FlexExport.h"
