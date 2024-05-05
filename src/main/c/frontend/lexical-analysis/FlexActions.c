@@ -90,73 +90,93 @@ Token UnknownLexemeAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
 }
 
 Token CheckLexemeAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
-
-}
-
-Token OpenParenthesisLexemeAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
-	
-}
-
-Token CloseParenthesisLexemeAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
-	
-}
-
-Token IntegerLexemeAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
-	
+	_logLexicalAnalyzerContext(__FUNCTION__, lexicalAnalyzerContext);
+	lexicalAnalyzerContext->semanticValue->token = CHECK;
+	return CHECK;
 }
 
 Token AutomataFunctionAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
-	
+	_logLexicalAnalyzerContext(__FUNCTION__, lexicalAnalyzerContext);
+	lexicalAnalyzerContext->semanticValue->token = AUTOMATA;
+	return AUTOMATA;
 }
 
 Token ColonPatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
-	
-}
-
-Token CommaPatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
-	
+	_logLexicalAnalyzerContext(__FUNCTION__, lexicalAnalyzerContext);
+	lexicalAnalyzerContext->semanticValue->token = COLON;
+	return COLON;
 }
 
 Token SemicolonPatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
-	
+	_logLexicalAnalyzerContext(__FUNCTION__, lexicalAnalyzerContext);
+	lexicalAnalyzerContext->semanticValue->token = SEMICOLON;
+	return SEMICOLON;
+}
+
+Token CommaPatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+	_logLexicalAnalyzerContext(__FUNCTION__, lexicalAnalyzerContext);
+	lexicalAnalyzerContext->semanticValue->token = COMMA;
+	return COMMA;
 }
 
 Token EndAutomataFunctionAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
-	
+	_logLexicalAnalyzerContext(__FUNCTION__, lexicalAnalyzerContext);
+	lexicalAnalyzerContext->semanticValue->token = AUTOMATA_NT;
+	return AUTOMATA_NT;
 }
 
 Token RuleFunctionAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
-	
+	_logLexicalAnalyzerContext(__FUNCTION__, lexicalAnalyzerContext);
+	lexicalAnalyzerContext->semanticValue->token = RULE;
+	return RULE;
 }
 
 Token EndRuleFunctionAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
-	
+	_logLexicalAnalyzerContext(__FUNCTION__, lexicalAnalyzerContext);
+	lexicalAnalyzerContext->semanticValue->token = RULE_NT;
+	return RULE_NT;
 }
 
 Token ColorSetupAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
-	
-}
-
-Token ColorHandlerAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
-	
+	_logLexicalAnalyzerContext(__FUNCTION__, lexicalAnalyzerContext);
+	lexicalAnalyzerContext->semanticValue->token = COLOR;
+	return COLOR;
 }
 
 Token BgColorSetupAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
-	
+	_logLexicalAnalyzerContext(__FUNCTION__, lexicalAnalyzerContext);
+	lexicalAnalyzerContext->semanticValue->token = BG_COLOR;
+	return BG_COLOR;
+}
+
+Token ColorHandlerAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+	_logLexicalAnalyzerContext(__FUNCTION__, lexicalAnalyzerContext);
+	int aux = lexicalAnalyzerContext->lexeme;
+	aux++;
+	lexicalAnalyzerContext->semanticValue->integer = (int)strtol(aux, NULL, 16);
+	return COLOR_HANDLER;
 }
 
 Token WrappingSetupAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
-	
+	_logLexicalAnalyzerContext(__FUNCTION__, lexicalAnalyzerContext);
+	lexicalAnalyzerContext->semanticValue->token = WRAPPING;
+	return WRAPPING;
 }
 
 Token TruePatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
-	
+	_logLexicalAnalyzerContext(__FUNCTION__, lexicalAnalyzerContext);
+	lexicalAnalyzerContext->semanticValue->integer = 1;
+	return TRUE;
 }
 
 Token FalsePatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
-	
+	_logLexicalAnalyzerContext(__FUNCTION__, lexicalAnalyzerContext);
+	lexicalAnalyzerContext->semanticValue->integer = 0;
+	return FALSE;
 }
 
 Token GridSpecificationAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
-
+	_logLexicalAnalyzerContext(__FUNCTION__, lexicalAnalyzerContext);
+	lexicalAnalyzerContext->semanticValue->token = GRID;
+	return GRID;
 }

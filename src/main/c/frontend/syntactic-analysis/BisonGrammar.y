@@ -38,6 +38,7 @@
 
 /** Terminals. */
 %token <integer> INTEGER
+%token <token> COMMA
 %token <token> ADD
 %token <token> CLOSE_PARENTHESIS
 %token <token> DIV
@@ -46,7 +47,20 @@
 %token <token> SUB
 %token <token> AUTOMATA
 %token <token> AUTOMATA_NT
+%token <token> RULE
+%token <token> RULE_NT
 %token <token> UNKNOWN
+%token <token> COLON
+%token <token> SEMICOLON
+%token <token> COLOR
+%token <token> CHECK
+%token <token> BG_COLOR
+%token <integer> COLOR_HANDLER
+%token <token> WRAPPING
+%token <integer> TRUE
+%token <integer> FALSE
+%token <token> GRID
+
 
 /** Non-terminals. */
 %type <constant> constant
@@ -54,6 +68,8 @@
 %type <factor> factor
 %type <program> program
 %type <check> check
+%type <automata_spec> automata_spec
+%type <grid> grid
 /**
  * Precedence and associativity.
  *
@@ -64,22 +80,43 @@
 
 %%
 
-program: expression													{ $$ = ExpressionProgramSemanticAction(currentCompilerState(), $1); }
+program: automata rule																				{ $$ = ExpressionProgramSemanticAction(currentCompilerState(), $1); }
+	| rule automata
+	| automata													
 	;
 
-expression: expression[left] ADD expression[right]					{ $$ = ArithmeticExpressionSemanticAction($left, $right, ADDITION); }
-	| expression[left] DIV expression[right]						{ $$ = ArithmeticExpressionSemanticAction($left, $right, DIVISION); }
-	| expression[left] MUL expression[right]						{ $$ = ArithmeticExpressionSemanticAction($left, $right, MULTIPLICATION); }
-	| expression[left] SUB expression[right]						{ $$ = ArithmeticExpressionSemanticAction($left, $right, SUBTRACTION); }
-	| factor														{ $$ = FactorExpressionSemanticAction($1); }
+automata_spec: AUTOMATA OPEN_PARENTHESIS INTEGER COMMA INTEGER COMMA INTEGER CLOSE_PARENTHESIS		{ $$ = AutomataSpecificationSemanticAction($3, $5, $7); }
 	;
 
-factor: OPEN_PARENTHESIS expression CLOSE_PARENTHESIS				{ $$ = ExpressionFactorSemanticAction($2); }
-	| constant														{ $$ = ConstantFactorSemanticAction($1); }
+grid: GRID OPEN_PARENTHESIS INTEGER COMMA INTEGER CLOSE_PARENTHESIS									{ $$ = GridSemanticAction($3, $5); }
 	;
 
-constant: INTEGER													{ $$ = IntegerConstantSemanticAction($1); }
+checkList: %empty
+	| checkList check
 	;
 
+check: OPEN_PARENTHESIS INTEGER COMMA INTEGER CLOSE_PARENTHESIS SEMICOLON							{ $$ = CheckSemanticAction($2, $4); }
+	;
+
+automata_header: automata_spec COMMA grid COLON
+	;
+
+automata: automata_header checkList AUTOMATA_NT
+	;
+
+rule_header: RULE COLON 
+	;
+
+color_setup: COLOR OPEN_PARENTHESIS COLOR_HANDLER CLOSE_PARENTHESIS SEMICOLON
+
+boolean: TRUE
+	| FALSE
+	;
+
+bg_color_setup: BG_COLOR OPEN_PARENTHESIS COLOR COMMA CLOSE_PARENTHESIS SEMICOLON
+
+wrapping: WRAPPING OPEN_PARENTHESIS boolean CLOSE_PARENTHESIS SEMICOLON
+
+rule: rule_header color_setup bg_color_setup wrapping RULE_NT
 
 %%

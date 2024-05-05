@@ -34,8 +34,8 @@ color #[a-f|A-F|0-9]{6}
 <MULTILINE_COMMENT>[^*]+			{ IgnoredLexemeAction(createLexicalAnalyzerContext()); }
 <MULTILINE_COMMENT>.				{ IgnoredLexemeAction(createLexicalAnalyzerContext()); }
 
-"("									{ return OpenParenthesisPatternAction(createLexicalAnalyzerContext()); }
-")"									{ return CloseParenthesisPatternAction(createLexicalAnalyzerContext()); }
+"("									{ return ParenthesisLexemeAction(createLexicalAnalyzerContext()); }
+")"									{ return ParenthesisLexemeAction(createLexicalAnalyzerContext()); }
 ":"                                 { return ColonPatternAction(createLexicalAnalyzerContext()); }
 ";"                                 { return SemicolonPatternAction(createLexicalAnalyzerContext()); }
 ","                                 { return CommaPatternAction(createLexicalAnalyzerContext()); }

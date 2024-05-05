@@ -25,6 +25,8 @@ typedef struct Automata Automata;
 typedef struct Check Check;
 typedef struct Rule Rule;
 typedef struct RuleNumber RuleNumber;
+typedef struct Colors Colors;
+typedef struct BgColors BgColors;
 /**
  * Node types for the Abstract Syntax Tree (AST).
  */
@@ -45,7 +47,6 @@ enum FactorType {
 struct Constant {
 	int value;
 };
-
 
 struct Factor {
 	union {
@@ -70,31 +71,42 @@ struct Program {
 	Expression * expression;
 };
 
-
-struct RuleNumber{
+struct RuleNumber {
 	int neighboursAliveToSurvive;
 	int neighboursAliveToDie;
 	int neighboursAliveToBeBorn;
 };
 
+
+
 struct Check {
-	int dimX;
-	int dimY;
+	int x,y; //( ͡° ͜ʖ ͡°) ayuda
+	struct Check * nextCheck;
 };
 
-typedef struct Check * Checks;
 
 struct Automata {
 	RuleNumber ruleNumber; 
 	int grid_x;
 	int grid_y;
-	Checks checks;
+	Check checks;
+};
+
+struct Colors {
+	int R;
+	int G;
+	int B;
+};
+
+struct BgColors{
+	int OnColors;
+	int OffColors;
 };
 
 struct Rule {
-	char * colors;
-	char * bgColors;
-	int wrapping;
+	Colors colors;
+	BgColors bgColors;
+	boolean wrapping;
 };
 
 

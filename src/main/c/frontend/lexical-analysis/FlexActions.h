@@ -33,10 +33,6 @@ Token UnknownLexemeAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
 
 Token CheckLexemeAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
 
-Token OpenParenthesisLexemeAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
-
-Token CloseParenthesisLexemeAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
-
 Token AutomataFunctionAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
 
 Token ColonPatternAction(LexicalAnalyzerContext *lexicalAnalyzerContext);

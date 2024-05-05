@@ -55,6 +55,16 @@ Expression * FactorExpressionSemanticAction(Factor * factor) {
 	return expression;
 }
 
+
+
+Check* CheckSemanticAction(const int x,const int y) {
+	_logSyntacticAnalyzerAction(__FUNCTION__);
+	Check * check = calloc(1, sizeof(Check));
+	check->x=x;
+	check->y=y;
+	return check;
+}
+
 Factor * ConstantFactorSemanticAction(Constant * constant) {
 	_logSyntacticAnalyzerAction(__FUNCTION__);
 	Factor * factor = calloc(1, sizeof(Factor));
