@@ -89,82 +89,74 @@ Token UnknownLexemeAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
 	return UNKNOWN;
 }
 
-Token checkLexemeAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+Token CheckLexemeAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
 
 }
 
-Token openParenthesisLexemeAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+Token OpenParenthesisLexemeAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
 	
 }
 
-Token closeParenthesisLexemeAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+Token CloseParenthesisLexemeAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
 	
 }
 
-Token integerLexemeAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+Token IntegerLexemeAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
 	
 }
 
-Token ignoredLexemeAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+Token AutomataFunctionAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
 	
 }
 
-Token unknownLexemeAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+Token ColonPatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
 	
 }
 
-Token automataFunctionAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+Token CommaPatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
 	
 }
 
-Token colonPatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+Token SemicolonPatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
 	
 }
 
-Token commaPatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+Token EndAutomataFunctionAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
 	
 }
 
-Token semicolonPatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+Token RuleFunctionAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
 	
 }
 
-Token endAutomataFunctionAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+Token EndRuleFunctionAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
 	
 }
 
-Token ruleFunctionAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+Token ColorSetupAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
 	
 }
 
-Token endRuleFunctionAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+Token ColorHandlerAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
 	
 }
 
-Token colorSetupAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+Token BgColorSetupAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
 	
 }
 
-Token colorHandlerAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+Token WrappingSetupAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
 	
 }
 
-Token bgColorSetupAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+Token TruePatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
 	
 }
 
-Token wrappingSetupAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+Token FalsePatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
 	
 }
 
-Token truePatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
-	
-}
-
-Token falsePatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
-	
-}
-
-Token gridSpecificationAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+Token GridSpecificationAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
 
 }

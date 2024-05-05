@@ -31,41 +31,35 @@ Token ParenthesisLexemeAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
 
 Token UnknownLexemeAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
 
-void checkLexemeAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
+Token CheckLexemeAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
 
-void openParenthesisLexemeAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
+Token OpenParenthesisLexemeAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
 
-void closeParenthesisLexemeAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
+Token CloseParenthesisLexemeAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
 
-void integerLexemeAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
+Token AutomataFunctionAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
 
-void ignoredLexemeAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
+Token ColonPatternAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
 
-void unknownLexemeAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
+Token CommaPatternAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
 
-void automataFunctionAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
+Token SemicolonPatternAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
 
-void colonPatternAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
+Token EndAutomataFunctionAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
 
-void commaPatternAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
+Token RuleFunctionAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
 
-void semicolonPatternAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
+Token EndRuleFunctionAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
 
-void endAutomataFunctionAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
+Token ColorSetupAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
 
-void ruleFunctionAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
+Token ColorHandlerAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
 
-void endRuleFunctionAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
+Token BgColorSetupAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
 
-void colorSetupAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
+Token WrappingSetupAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
 
-void colorHandlerAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
-
-void bgColorSetupAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
-
-void wrappingSetupAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
-
-void truePatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext);
-void falsePatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext);
+Token TruePatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext);
+Token FalsePatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext);
 
 #endif

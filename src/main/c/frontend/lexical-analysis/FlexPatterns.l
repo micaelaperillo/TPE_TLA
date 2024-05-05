@@ -34,35 +34,35 @@ color #[a-f|A-F|0-9]{6}
 <MULTILINE_COMMENT>[^*]+			{ IgnoredLexemeAction(createLexicalAnalyzerContext()); }
 <MULTILINE_COMMENT>.				{ IgnoredLexemeAction(createLexicalAnalyzerContext()); }
 
-"("									{ return openParenthesisPatternAction(createLexicalAnalyzerContext()); }
-")"									{ return closeParenthesisPatternAction(createLexicalAnalyzerContext()); }
-":"                                 { return colonPatternAction(createLexicalAnalyzerContext()); }
-";"                                 { return semicolonPatternAction(createLexicalAnalyzerContext()); }
-","                                 { return commaPatternAction(createLexicalAnalyzerContext()); }
+"("									{ return OpenParenthesisPatternAction(createLexicalAnalyzerContext()); }
+")"									{ return CloseParenthesisPatternAction(createLexicalAnalyzerContext()); }
+":"                                 { return ColonPatternAction(createLexicalAnalyzerContext()); }
+";"                                 { return SemicolonPatternAction(createLexicalAnalyzerContext()); }
+","                                 { return CommaPatternAction(createLexicalAnalyzerContext()); }
 
-[[:digit:]]+						{ return integerLexemeAction(createLexicalAnalyzerContext()); }
+[[:digit:]]+						{ return IntegerLexemeAction(createLexicalAnalyzerContext()); }
 
-[[:space:]]+						{ ignoredLexemeAction(createLexicalAnalyzerContext()); }
-.									{ return unknownLexemeAction(createLexicalAnalyzerContext()); }
+[[:space:]]+						{ IgnoredLexemeAction(createLexicalAnalyzerContext()); }
+.									{ return UnknownLexemeAction(createLexicalAnalyzerContext()); }
 
-"automata"                          { return automataFunctionAction(createLexicalAnalyzerContext()); }
-"automatan't"                       { return endAutomataFunctionAction(createLexicalAnalyzerContext()); }
+"automata"                          { return AutomataFunctionAction(createLexicalAnalyzerContext()); }
+"automatan't"                       { return EndAutomataFunctionAction(createLexicalAnalyzerContext()); }
 
-"rule"                              { return ruleFuncionAction(createLexicalAnalyzerContext()); }
-"rulen't"                           { return endRuleFunctionAction(createLexicalAnalyzerContext()); }
+"rule"                              { return RuleFuncionAction(createLexicalAnalyzerContext()); }
+"rulen't"                           { return EndRuleFunctionAction(createLexicalAnalyzerContext()); }
 
-"grid"                              { return gridSpecificationAction(createLexicalAnalyzerContext()); }
+"grid"                              { return GridSpecificationAction(createLexicalAnalyzerContext()); }
 
-"check"                             { return checkLexemeAction(createLexicalAnalyzerContext()); }   
+"check"                             { return CheckLexemeAction(createLexicalAnalyzerContext()); }   
 
-"color"                             { return colorSetupAction(createLexicalAnalyzerContext()); }
-{color}                             { return colorHandlerAction(createLexicalAnalyzerContext()); }
+"color"                             { return ColorSetupAction(createLexicalAnalyzerContext()); }
+{color}                             { return ColorHandlerAction(createLexicalAnalyzerContext()); }
 
-"bgColor"                           { return bgColorSetupAction(createLexicalAnalyzerContext()); }
+"bgColor"                           { return BgColorSetupAction(createLexicalAnalyzerContext()); }
 
-"wrapping"                          { return wrappingSetupAction(createLexicalAnalyzerContext()); }
-"true"                              { return truePatternAction(createLexicalAnalyzerContext()); }
-"false"                             { return falsePatternAction(createLexicalAnalyzerContext()); }
+"wrapping"                          { return WrappingSetupAction(createLexicalAnalyzerContext()); }
+"true"                              { return TruePatternAction(createLexicalAnalyzerContext()); }
+"false"                             { return FalsePatternAction(createLexicalAnalyzerContext()); }
 
 %%
 
