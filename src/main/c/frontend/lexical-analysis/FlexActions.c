@@ -103,8 +103,14 @@ Token AutomataFunctionAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
 
 Token PropertyPatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
     _logLexicalAnalyzerContext(__FUNCTION__, lexicalAnalyzerContext);
-    strncpy(lexicalAnalyzerContext->semanticValue->string, lexicalAnalyzerContext->lexeme + 5, lexicalAnalyzerContext->length - 5);
+    lexicalAnalyzerContext->semanticValue->token = PROPERTY;
     return PROPERTY;
+}
+
+Token KeywordPatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+    _logLexicalAnalyzerContext(__FUNCTION__, lexicalAnalyzerContext);
+    lexicalAnalyzerContext->semanticValue->string = lexicalAnalyzerContext->lexeme;
+    return KEYWORD;
 }
 
 Token ColonPatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {

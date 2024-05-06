@@ -57,4 +57,6 @@ Token BooleanPatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext);
 
 Token GridSpecificationAction(LexicalAnalyzerContext * lexicalAnalyzerContext);
 
+Token KeywordPatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext);
+
 #endif

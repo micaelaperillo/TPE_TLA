@@ -99,7 +99,7 @@ static void _generateExpression(const unsigned int indentationLevel, Expression 
  * Generates the output of the program.
  */
 static void _generateProgram(Program * program) {
-	_generateExpression(3, program->expression);
+	//_generateExpression(3, program->expression);
 }
 
 /**
@@ -127,7 +127,7 @@ static void _generatePrologue(void) {
  * Generates an indentation string for the specified level.
  */
 static char * _indentation(const unsigned int level) {
-	return indentation(_indentationCharacter, level, _indentationSize);
+	//return indentation(_indentationCharacter, level, _indentationSize);
 }
 
 /**
