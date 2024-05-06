@@ -14,8 +14,11 @@
 
 	/** Non-terminals. */
 	Automata* automata;
+	CheckList* checkList;
 	Check* check;
 
+	RuleNumber* ruleNumber;
+	Grid* grid;
 	Constant * constant;
 	Expression * expression;
 	Factor * factor;
@@ -39,12 +42,8 @@
 /** Terminals. */
 %token <integer> INTEGER
 %token <token> COMMA
-%token <token> ADD
 %token <token> CLOSE_PARENTHESIS
-%token <token> DIV
-%token <token> MUL
 %token <token> OPEN_PARENTHESIS
-%token <token> SUB
 %token <token> AUTOMATA
 %token <token> AUTOMATA_NT
 %token <token> RULE
@@ -63,12 +62,14 @@
 
 
 /** Non-terminals. */
+%type <automata> automata
 %type <constant> constant
 %type <expression> expression
 %type <factor> factor
 %type <program> program
+%type <checkList> checkList
 %type <check> check
-%type <automata_spec> automata_spec
+%type <ruleNumber> ruleNumber
 %type <grid> grid
 /**
  * Precedence and associativity.
@@ -82,41 +83,39 @@
 
 program: automata rule																				{ $$ = ExpressionProgramSemanticAction(currentCompilerState(), $1); }
 	| rule automata
-	| automata													
+	| automata
 	;
 
-automata_spec: AUTOMATA OPEN_PARENTHESIS INTEGER COMMA INTEGER COMMA INTEGER CLOSE_PARENTHESIS		{ $$ = AutomataSpecificationSemanticAction($3, $5, $7); }
+ruleNumber: AUTOMATA OPEN_PARENTHESIS INTEGER COMMA INTEGER COMMA INTEGER CLOSE_PARENTHESIS			{ $$ = RuleNumberSemanticAction($3, $5, $7); }
 	;
 
 grid: GRID OPEN_PARENTHESIS INTEGER COMMA INTEGER CLOSE_PARENTHESIS									{ $$ = GridSemanticAction($3, $5); }
 	;
 
-checkList: %empty
-	| checkList check
+checkList: %empty																					{$$ = CheckListSemanticAct}
+	| checkList check																				{ $$ = CheckListSemanticAction($1, $2); }
 	;
 
 check: OPEN_PARENTHESIS INTEGER COMMA INTEGER CLOSE_PARENTHESIS SEMICOLON							{ $$ = CheckSemanticAction($2, $4); }
 	;
 
-automata_header: automata_spec COMMA grid COLON
+automata: AUTOMATA ruleNumber COMMA grid COLON checkList AUTOMATA_NT								{ $$ = AutomataSemanticAction($2, $4, $6); }
 	;
 
-automata: automata_header checkList AUTOMATA_NT
-	;
-
-rule_header: RULE COLON 
+rule_header: RULE COLON
 	;
 
 color_setup: COLOR OPEN_PARENTHESIS COLOR_HANDLER CLOSE_PARENTHESIS SEMICOLON
-
-boolean: TRUE
-	| FALSE
-	;
 
 bg_color_setup: BG_COLOR OPEN_PARENTHESIS COLOR COMMA CLOSE_PARENTHESIS SEMICOLON
 
 wrapping: WRAPPING OPEN_PARENTHESIS boolean CLOSE_PARENTHESIS SEMICOLON
 
+boolean: TRUE
+	| FALSE
+	;
+
 rule: rule_header color_setup bg_color_setup wrapping RULE_NT
+	;
 
 %%

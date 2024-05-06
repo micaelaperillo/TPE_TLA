@@ -17,12 +17,15 @@ void shutdownAbstractSyntaxTreeModule();
 typedef enum ExpressionType ExpressionType;
 typedef enum FactorType FactorType;
 
+typedef struct Automata Automata;
+typedef struct Grid Grid;
 typedef struct Constant Constant;
 typedef struct Expression Expression;
 typedef struct Factor Factor;
 typedef struct Program Program;
 typedef struct Automata Automata;
 typedef struct Check Check;
+typedef struct CheckList CheckList;
 typedef struct Rule Rule;
 typedef struct RuleNumber RuleNumber;
 typedef struct Colors Colors;
@@ -30,14 +33,6 @@ typedef struct BgColors BgColors;
 /**
  * Node types for the Abstract Syntax Tree (AST).
  */
-
-enum ExpressionType {
-	ADDITION,
-	DIVISION,
-	FACTOR,
-	MULTIPLICATION,
-	SUBTRACTION
-};
 
 enum FactorType {
 	CONSTANT,
@@ -48,24 +43,8 @@ struct Constant {
 	int value;
 };
 
-struct Factor {
-	union {
-		Constant * constant;
-		Expression * expression;
-	};
-	FactorType type;
-};
 
-struct Expression {
-	union {
-		Factor * factor;
-		struct {
-			Expression * leftExpression;
-			Expression * rightExpression;
-		};
-	};
-	ExpressionType type;
-};
+
 
 struct Program {
 	Expression * expression;
@@ -78,18 +57,25 @@ struct RuleNumber {
 };
 
 
-
-struct Check {
-	int x,y; //( ͡° ͜ʖ ͡°) ayuda
-	struct Check * nextCheck;
+struct CheckList {
+	Check * check;
+	CheckList * next;
 };
 
 
+struct Check {
+	int x,y; //( ͡° ͜ʖ ͡°) ayuda
+};
+
+struct Grid {
+	int width;
+	int height;
+};
+
 struct Automata {
-	RuleNumber ruleNumber; 
-	int grid_x;
-	int grid_y;
-	Check checks;
+	RuleNumber * ruleNumber;
+	Grid * grid;
+	Check * checks;
 };
 
 struct Colors {
@@ -107,6 +93,11 @@ struct Rule {
 	Colors colors;
 	BgColors bgColors;
 	boolean wrapping;
+};
+
+struct PropertyList {
+	void * property;
+	PropertyList * next;
 };
 
 

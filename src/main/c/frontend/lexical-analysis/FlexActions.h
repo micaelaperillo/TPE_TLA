@@ -55,7 +55,6 @@ Token BgColorSetupAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
 
 Token WrappingSetupAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
 
-Token TruePatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext);
-Token FalsePatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext);
+Token BooleanPatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext);
 
 #endif

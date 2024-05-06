@@ -163,16 +163,15 @@ Token WrappingSetupAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
 	return WRAPPING;
 }
 
-Token TruePatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+Token BooleanPatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
 	_logLexicalAnalyzerContext(__FUNCTION__, lexicalAnalyzerContext);
-	lexicalAnalyzerContext->semanticValue->integer = 1;
-	return TRUE;
-}
-
-Token FalsePatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
-	_logLexicalAnalyzerContext(__FUNCTION__, lexicalAnalyzerContext);
-	lexicalAnalyzerContext->semanticValue->integer = 0;
-	return FALSE;
+	int integer = 0;
+	switch (lexicalAnalyzerContext->lexeme[0]) {
+		case 't': integer = 1; break;
+		case 'f': integer = 0; break;
+	}
+	lexicalAnalyzerContext->semanticValue->integer = integer;
+	return BOOLEAN;
 }
 
 Token GridSpecificationAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
