@@ -12,14 +12,20 @@
 	int integer;
 	Token token;
 	boolean boolean;
+	char* string;
 
 	/** Non-terminals. */
 	Automata* automata;
 	CheckList* checkList;
 	Check* check;
-
 	RuleNumber* ruleNumber;
+	Rule* rule;
 	Grid* grid;
+	Data* data_type;
+	ParameterList* parameter_list;
+	PropertyList* property_list;
+	Property* property;
+
 	Constant * constant;
 	Expression * expression;
 	Factor * factor;
@@ -71,6 +77,7 @@
 %type <checkList> checkList
 %type <check> check
 %type <ruleNumber> ruleNumber
+%type <rule> rule
 %type <grid> grid
 %type <data_type> data_type
 %type <parameter_list> parameter_list
@@ -108,9 +115,6 @@ check: OPEN_PARENTHESIS INTEGER COMMA INTEGER CLOSE_PARENTHESIS SEMICOLON							
 automata: AUTOMATA ruleNumber COMMA grid COLON checkList AUTOMATA_NT								{ $$ = AutomataSemanticAction($2, $4, $6); }
 	;
 
-rule_header: RULE COLON
-	;
-
 data_type: BOOLEAN												{ $$ = DataSemanticAction("bool", $1); }
     | COLOR_HANDLER												{ $$ = DataSemanticAction("color", $1); }
     | INTEGER													{ $$ = DataSemanticAction("int", $1); }
@@ -127,7 +131,7 @@ property_list: %empty												{ $$ = PropertyListSemanticAction(NULL, NULL); 
     | property_list property											{ $$ = PropertyListSemanticAction($2, $1); }
     ;
 
-rule: rule_header property_list RULE_NT										{ $$ = RuleSemanticAction($2); }
+rule: RULE COLON property_list RULE_NT										{ $$ = RuleSemanticAction($3); }
 	;
 
 %%

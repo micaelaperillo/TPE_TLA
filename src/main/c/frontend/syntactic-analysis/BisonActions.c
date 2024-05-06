@@ -53,6 +53,14 @@ ParameterList * ParameterListSemanticAction(Data * data, ParameterList * next) {
     return parameterList;
 }
 
+Property * PropertySemanticAction(char * propertyName, ParameterList * parameters) {
+    _logSyntacticAnalyzerAction(__FUNCTION__);
+    Property * property = calloc(1, sizeof(Property));
+    property->propertyName = propertyName;
+    property->parameters = parameters;
+    return property;
+}
+
 PropertyList * PropertyListSemanticAction(Property * property, PropertyList * next) {
     _logSyntacticAnalyzerAction(__FUNCTION__);
     PropertyList * propertyList = calloc(1, sizeof(PropertyList));
@@ -60,16 +68,6 @@ PropertyList * PropertyListSemanticAction(Property * property, PropertyList * ne
     propertyList->next = next;
     return propertyList;
 }
-
-Expression * ArithmeticExpressionSemanticAction(Expression * leftExpression, Expression * rightExpression, ExpressionType type) {
-	_logSyntacticAnalyzerAction(__FUNCTION__);
-	Expression * expression = calloc(1, sizeof(Expression));
-	expression->leftExpression = leftExpression;
-	expression->rightExpression = rightExpression;
-	expression->type = type;
-	return expression;
-}
-
 
 Check * CheckSemanticAction(const int x,const int y) {
 	_logSyntacticAnalyzerAction(__FUNCTION__);
@@ -96,8 +94,6 @@ Grid * GridSemanticAction(const int width, const int height) {
 	return grid;
 }
 
-
-
 CheckList * CheckListSemanticAction(Check * check, CheckList * next) {
 	_logSyntacticAnalyzerAction(__FUNCTION__);
 	CheckList * checkList = calloc(1, sizeof(CheckList));
@@ -121,19 +117,4 @@ Rule * RuleSemanticAction(PropertyList * properties) {
     Rule * rule = calloc(1, sizeof(Rule));
     rule->properties = properties;
     return rule;
-}
-
-Program * ExpressionProgramSemanticAction(CompilerState * compilerState, Expression * expression) {
-	_logSyntacticAnalyzerAction(__FUNCTION__);
-	Program * program = calloc(1, sizeof(Program));
-	program->expression = expression;
-	compilerState->abstractSyntaxtTree = program;
-	if (0 < flexCurrentContext()) {
-		logError(_logger, "The final context is not the default (0): %d", flexCurrentContext());
-		compilerState->succeed = false;
-	}
-	else {
-		compilerState->succeed = true;
-	}
-	return program;
 }

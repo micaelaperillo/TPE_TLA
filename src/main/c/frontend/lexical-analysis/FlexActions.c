@@ -24,7 +24,7 @@ static void _logLexicalAnalyzerContext(const char * functionName, LexicalAnalyze
  * Logs a lexical-analyzer context in DEBUGGING level.
  */
 static void _logLexicalAnalyzerContext(const char * functionName, LexicalAnalyzerContext * lexicalAnalyzerContext) {
-	char * escapedLexeme = escape(lexicalAnalyzerContext->f);
+	char * escapedLexeme = escape(lexicalAnalyzerContext->lexeme);
 	logDebugging(_logger, "%s: %s (context = %d, length = %d, line = %d)",
 		functionName,
 		escapedLexeme,
@@ -103,8 +103,7 @@ Token AutomataFunctionAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
 
 Token PropertyPatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
     _logLexicalAnalyzerContext(__FUNCTION__, lexicalAnalyzerContext);
-    strncpy(lexicalAnalyzerContext->semanticValue-> ,lexicalAnalyzerContext->lexeme + 5, )
-    lexicalAnalyzerContext->semanticValue->string = PROPERTY;
+    strncpy(lexicalAnalyzerContext->semanticValue->string, lexicalAnalyzerContext->lexeme + 5, lexicalAnalyzerContext->length - 5);
     return PROPERTY;
 }
 

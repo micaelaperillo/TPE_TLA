@@ -57,10 +57,6 @@ prop ^prop:[A-Za-z0-9]+$
 
 {prop}                              { return PropertyPatternAction(createLexicalAnalyzerContext()); }
 
-/**
- * Data Types
- */
-
 {color}                             { return ColorHandlerAction(createLexicalAnalyzerContext()); }
 "true"                              { return BooleanPatternAction(createLexicalAnalyzerContext()); }
 "false"                             { return BooleanPatternAction(createLexicalAnalyzerContext()); }
