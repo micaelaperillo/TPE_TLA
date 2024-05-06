@@ -10,6 +10,9 @@
 /node_modules/
 /obj/
 
+cmake-build-debug
+.idea
+
 # Files.
 .DS_Store
 .env*
