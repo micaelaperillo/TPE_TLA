@@ -25,6 +25,7 @@
  */
 
 color #[a-f|A-F|0-9]{6}
+prop ^prop:[A-Za-z0-9]+$
 
 %%
 
@@ -39,8 +40,7 @@ color #[a-f|A-F|0-9]{6}
 ":"                                 { return ColonPatternAction(createLexicalAnalyzerContext()); }
 ";"                                 { return SemicolonPatternAction(createLexicalAnalyzerContext()); }
 ","                                 { return CommaPatternAction(createLexicalAnalyzerContext()); }
-
-[[:digit:]]+						{ return IntegerLexemeAction(createLexicalAnalyzerContext()); }
+"="                                 { return EqualPatternAction(createLexicalAnalyzerContext()); }
 
 [[:space:]]+						{ IgnoredLexemeAction(createLexicalAnalyzerContext()); }
 .									{ return UnknownLexemeAction(createLexicalAnalyzerContext()); }
@@ -55,14 +55,16 @@ color #[a-f|A-F|0-9]{6}
 
 "check"                             { return CheckLexemeAction(createLexicalAnalyzerContext()); }
 
-"color"                             { return ColorSetupAction(createLexicalAnalyzerContext()); }
+{prop}                              { return PropertyPatternAction(createLexicalAnalyzerContext()); }
+
+/**
+ * Data Types
+ */
+
 {color}                             { return ColorHandlerAction(createLexicalAnalyzerContext()); }
-
-"bgColor"                           { return BgColorSetupAction(createLexicalAnalyzerContext()); }
-
-"wrapping"                          { return WrappingSetupAction(createLexicalAnalyzerContext()); }
 "true"                              { return BooleanPatternAction(createLexicalAnalyzerContext()); }
 "false"                             { return BooleanPatternAction(createLexicalAnalyzerContext()); }
+[[:digit:]]+						{ return IntegerLexemeAction(createLexicalAnalyzerContext()); }
 
 %%
 

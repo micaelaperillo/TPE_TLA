@@ -17,6 +17,10 @@ void shutdownAbstractSyntaxTreeModule();
 typedef enum ExpressionType ExpressionType;
 typedef enum FactorType FactorType;
 
+typedef struct ParameterList ParameterList;
+typedef struct Property Property;
+typedef struct PropertyList PropertyList;
+typedef struct Data Data;
 typedef struct Automata Automata;
 typedef struct Grid Grid;
 typedef struct Constant Constant;
@@ -42,9 +46,6 @@ enum FactorType {
 struct Constant {
 	int value;
 };
-
-
-
 
 struct Program {
 	Expression * expression;
@@ -78,27 +79,30 @@ struct Automata {
 	Check * checks;
 };
 
-struct Colors {
-	int R;
-	int G;
-	int B;
+struct Data {
+    const char * dataType;
+    int value;
 };
 
-struct BgColors{
-	int OnColors;
-	int OffColors;
+struct ParameterList {
+    Data * data;
+    ParameterList * next;
 };
 
-struct Rule {
-	Colors colors;
-	BgColors bgColors;
-	boolean wrapping;
+struct Property {
+    char * propertyName;
+    ParameterList * parameters;
 };
 
 struct PropertyList {
-	void * property;
-	PropertyList * next;
+    Property * property;
+    PropertyList * next;
 };
+
+struct Rule {
+	PropertyList * properties;
+};
+
 
 
 /**

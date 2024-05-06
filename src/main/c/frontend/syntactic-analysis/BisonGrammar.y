@@ -51,14 +51,13 @@
 %token <token> UNKNOWN
 %token <token> COLON
 %token <token> SEMICOLON
-%token <token> COLOR
+%token <token> EQUAL
 %token <token> CHECK
-%token <token> BG_COLOR
 %token <integer> COLOR_HANDLER
-%token <token> WRAPPING
 %token <integer> TRUE
 %token <integer> FALSE
 %token <token> GRID
+%token <token> PROPERTY
 
 
 /** Non-terminals. */
@@ -71,6 +70,11 @@
 %type <check> check
 %type <ruleNumber> ruleNumber
 %type <grid> grid
+%type <data_type> data_type
+%type <parameter_list> parameter_list
+%type <property_list> property_list
+%type <property> property
+
 /**
  * Precedence and associativity.
  *
@@ -105,17 +109,23 @@ automata: AUTOMATA ruleNumber COMMA grid COLON checkList AUTOMATA_NT								{ $$
 rule_header: RULE COLON
 	;
 
-color_setup: COLOR OPEN_PARENTHESIS COLOR_HANDLER CLOSE_PARENTHESIS SEMICOLON
+data_type: BOOLEAN
+    | COLOR_HANDLER
+    | INTEGER
+    ;
 
-bg_color_setup: BG_COLOR OPEN_PARENTHESIS COLOR COMMA CLOSE_PARENTHESIS SEMICOLON
+parameter_list: data_type
+    | parameter_list COMMA data_type
+    ;
 
-wrapping: WRAPPING OPEN_PARENTHESIS boolean CLOSE_PARENTHESIS SEMICOLON
+property: PROPERTY EQUAL OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS SEMICOLON
+    ;
 
-boolean: TRUE
-	| FALSE
-	;
+property_list: %empty
+    | property_list property
+    ;
 
-rule: rule_header color_setup bg_color_setup wrapping RULE_NT
+rule: rule_header property_list RULE_NT
 	;
 
 %%

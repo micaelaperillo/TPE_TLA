@@ -101,6 +101,12 @@ Token AutomataFunctionAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
 	return AUTOMATA;
 }
 
+Token PropertyPatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+    _logLexicalAnalyzerContext(__FUNCTION__, lexicalAnalyzerContext);
+    lexicalAnalyzerContext->semanticValue->token = PROPERTY;
+    return PROPERTY;
+}
+
 Token ColonPatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
 	_logLexicalAnalyzerContext(__FUNCTION__, lexicalAnalyzerContext);
 	lexicalAnalyzerContext->semanticValue->token = COLON;
@@ -117,6 +123,12 @@ Token CommaPatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
 	_logLexicalAnalyzerContext(__FUNCTION__, lexicalAnalyzerContext);
 	lexicalAnalyzerContext->semanticValue->token = COMMA;
 	return COMMA;
+}
+
+Token EqualPatternAction(LexicalAnalyzerContext *lexicalAnalyzerContext) {
+    _logLexicalAnalyzerContext(__FUNCTION__, lexicalAnalyzerContext);
+    lexicalAnalyzerContext->semanticValue->token = EQUAL;
+    return EQUAL;
 }
 
 Token EndAutomataFunctionAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
@@ -137,30 +149,12 @@ Token EndRuleFunctionAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
 	return RULE_NT;
 }
 
-Token ColorSetupAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
-	_logLexicalAnalyzerContext(__FUNCTION__, lexicalAnalyzerContext);
-	lexicalAnalyzerContext->semanticValue->token = COLOR;
-	return COLOR;
-}
-
-Token BgColorSetupAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
-	_logLexicalAnalyzerContext(__FUNCTION__, lexicalAnalyzerContext);
-	lexicalAnalyzerContext->semanticValue->token = BG_COLOR;
-	return BG_COLOR;
-}
-
 Token ColorHandlerAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
 	_logLexicalAnalyzerContext(__FUNCTION__, lexicalAnalyzerContext);
 	int aux = lexicalAnalyzerContext->lexeme;
 	aux++;
 	lexicalAnalyzerContext->semanticValue->integer = (int)strtol(aux, NULL, 16);
 	return COLOR_HANDLER;
-}
-
-Token WrappingSetupAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
-	_logLexicalAnalyzerContext(__FUNCTION__, lexicalAnalyzerContext);
-	lexicalAnalyzerContext->semanticValue->token = WRAPPING;
-	return WRAPPING;
 }
 
 Token BooleanPatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {

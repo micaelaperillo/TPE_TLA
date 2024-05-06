@@ -41,19 +41,17 @@ Token CommaPatternAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
 
 Token SemicolonPatternAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
 
+Token EqualPatternAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
+
 Token EndAutomataFunctionAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
 
 Token RuleFunctionAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
 
 Token EndRuleFunctionAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
 
-Token ColorSetupAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
+Token PropertyPatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext);
 
 Token ColorHandlerAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
-
-Token BgColorSetupAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
-
-Token WrappingSetupAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
 
 Token BooleanPatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext);
 
