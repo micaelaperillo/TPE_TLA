@@ -55,14 +55,29 @@ Expression * FactorExpressionSemanticAction(Factor * factor) {
 	return expression;
 }
 
-
-
-Check* CheckSemanticAction(const int x,const int y) {
+Check * CheckSemanticAction(const int x,const int y) {
 	_logSyntacticAnalyzerAction(__FUNCTION__);
 	Check * check = calloc(1, sizeof(Check));
 	check->x=x;
 	check->y=y;
 	return check;
+}
+
+RuleNumber* RuleNumberSemanticAction(const int nAliveToSurvive, const int nAliveToDie, const int nAliveToBeBorn) {
+	_logSyntacticAnalyzerAction(__FUNCTION__);
+	RuleNumber * ruleNumber = calloc(1, sizeof(RuleNumber));
+	ruleNumber->neighboursAliveToSurvive = nAliveToSurvive;
+	ruleNumber->neighboursAliveToDie = nAliveToDie;
+	ruleNumber->neighboursAliveToBeBorn = nAliveToBeBorn;
+	return ruleNumber;
+}
+
+Grid * GridSemanticAction(const int width, const int height) {
+	_logSyntacticAnalyzerAction(__FUNCTION__);
+	Grid * grid = calloc(1, sizeof(Grid));
+	grid->width = width;
+	grid->height = height;
+	return grid;
 }
 
 Factor * ConstantFactorSemanticAction(Constant * constant) {
@@ -79,6 +94,31 @@ Factor * ExpressionFactorSemanticAction(Expression * expression) {
 	factor->expression = expression;
 	factor->type = EXPRESSION;
 	return factor;
+}
+
+CheckList * CheckListSemanticAction(Check * check, CheckList * next) {
+	_logSyntacticAnalyzerAction(__FUNCTION__);
+	CheckList * checkList = calloc(1, sizeof(CheckList));
+	checkList->check = check;
+	checkList->next = next;
+	return checkList;
+}
+
+Check * CheckSemanticAction(const int x, const int y) {
+	_logSyntacticAnalyzerAction(__FUNCTION__);
+	Check * check = calloc(1, sizeof(Check));
+	check->x = x;
+	check->y = y;
+	return check;
+}
+
+
+Automata * AutomataSemanticAction(RuleNumber * ruleNumber, Grid * grid, Check * checks) {
+	_logSyntacticAnalyzerAction(__FUNCTION__);
+	Automata * automata = calloc(1, sizeof(Automata));
+	automata->ruleNumber = ruleNumber;
+	automata->grid = grid;
+	automata->checks = checks;
 }
 
 Program * ExpressionProgramSemanticAction(CompilerState * compilerState, Expression * expression) {

@@ -53,7 +53,7 @@ color #[a-f|A-F|0-9]{6}
 
 "grid"                              { return GridSpecificationAction(createLexicalAnalyzerContext()); }
 
-"check"                             { return CheckLexemeAction(createLexicalAnalyzerContext()); }   
+"check"                             { return CheckLexemeAction(createLexicalAnalyzerContext()); }
 
 "color"                             { return ColorSetupAction(createLexicalAnalyzerContext()); }
 {color}                             { return ColorHandlerAction(createLexicalAnalyzerContext()); }
@@ -61,8 +61,8 @@ color #[a-f|A-F|0-9]{6}
 "bgColor"                           { return BgColorSetupAction(createLexicalAnalyzerContext()); }
 
 "wrapping"                          { return WrappingSetupAction(createLexicalAnalyzerContext()); }
-"true"                              { return TruePatternAction(createLexicalAnalyzerContext()); }
-"false"                             { return FalsePatternAction(createLexicalAnalyzerContext()); }
+"true"                              { return BooleanPatternAction(createLexicalAnalyzerContext()); }
+"false"                             { return BooleanPatternAction(createLexicalAnalyzerContext()); }
 
 %%
 
