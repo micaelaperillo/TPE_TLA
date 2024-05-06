@@ -41,6 +41,7 @@ Constant * IntegerConstantSemanticAction(const int value) {
 Data * DataSemanticAction(char * dataType, int value) {
     _logSyntacticAnalyzerAction(__FUNCTION__);
     Data * data = calloc(1, sizeof(Data));
+    data->dataType = dataType;
     data->value = value;
     return data;
 }
@@ -117,4 +118,19 @@ Rule * RuleSemanticAction(PropertyList * properties) {
     Rule * rule = calloc(1, sizeof(Rule));
     rule->properties = properties;
     return rule;
+}
+
+Program * AutomataProgramSemanticAction(CompilerState * compilerState, Automata * automata, Rule * rule) {
+    _logSyntacticAnalyzerAction(__FUNCTION__);
+    Program * program = calloc(1, sizeof(Program));
+    program->automata = automata;
+    compilerState->abstractSyntaxtTree = program;
+    if (0 < flexCurrentContext()) {
+        logError(_logger, "The final context is not the default (0): %d", flexCurrentContext());
+        compilerState->succeed = false;
+    }
+    else {
+        compilerState->succeed = true;
+    }
+    return program;
 }

@@ -48,7 +48,8 @@ struct Constant {
 };
 
 struct Program {
-	Expression * expression;
+	Automata* automata;
+    Rule* rule;
 };
 
 struct RuleNumber {
@@ -76,7 +77,7 @@ struct Grid {
 struct Automata {
 	RuleNumber * ruleNumber;
 	Grid * grid;
-	Check * checks;
+	CheckList * checks;
 };
 
 struct Data {

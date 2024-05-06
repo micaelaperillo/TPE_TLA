@@ -27,6 +27,12 @@ CheckList * CheckListSemanticAction(Check * check, CheckList * next);
 Automata * AutomataSemanticAction(RuleNumber * ruleNumber, Grid * grid, CheckList * checks);
 Factor * ConstantFactorSemanticAction(Constant * constant);
 Factor * ExpressionFactorSemanticAction(Expression * expression);
-Program * ExpressionProgramSemanticAction(CompilerState * compilerState, Expression * expression);
+Program * AutomataProgramSemanticAction(CompilerState * compilerState, Automata * automata, Rule * rule);
 Check* CheckSemanticAction(const int x,const int y);
+Rule * RuleSemanticAction(PropertyList * properties);
+PropertyList * PropertyListSemanticAction(Property * property, PropertyList * next);
+Property * PropertySemanticAction(char * propertyName, ParameterList * parameters);
+ParameterList * ParameterListSemanticAction(Data * data, ParameterList * next);
+Data * DataSemanticAction(char * dataType, int value);
+
 #endif

@@ -151,7 +151,7 @@ Token EndRuleFunctionAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
 
 Token ColorHandlerAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
 	_logLexicalAnalyzerContext(__FUNCTION__, lexicalAnalyzerContext);
-	int aux = lexicalAnalyzerContext->lexeme;
+	char* aux = lexicalAnalyzerContext->lexeme;
 	aux++;
 	lexicalAnalyzerContext->semanticValue->integer = (int)strtol(aux, NULL, 16);
 	return COLOR_HANDLER;

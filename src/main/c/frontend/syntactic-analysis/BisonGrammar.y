@@ -26,9 +26,6 @@
 	PropertyList* property_list;
 	Property* property;
 
-	Constant * constant;
-	Expression * expression;
-	Factor * factor;
 	Program * program;
 }
 
@@ -62,17 +59,12 @@
 %token <token> EQUAL
 %token <token> CHECK
 %token <integer> COLOR_HANDLER
-%token <integer> TRUE
-%token <integer> FALSE
 %token <token> GRID
 %token <string> PROPERTY
 
 
 /** Non-terminals. */
 %type <automata> automata
-%type <constant> constant
-%type <expression> expression
-%type <factor> factor
 %type <program> program
 %type <checkList> checkList
 %type <check> check
@@ -94,25 +86,24 @@
 
 %%
 
-program: automata rule																				{ $$ = ExpressionProgramSemanticAction(currentCompilerState(), $1); }
-	| rule automata
-	| automata
+program: automata rule												{ $$ = AutomataProgramSemanticAction(currentCompilerState(), $1, $2); }
+	| rule automata												{ $$ = AutomataProgramSemanticAction(currentCompilerState(), $2, $1); }
 	;
 
 ruleNumber: AUTOMATA OPEN_PARENTHESIS INTEGER COMMA INTEGER COMMA INTEGER CLOSE_PARENTHESIS			{ $$ = RuleNumberSemanticAction($3, $5, $7); }
 	;
 
-grid: GRID OPEN_PARENTHESIS INTEGER COMMA INTEGER CLOSE_PARENTHESIS									{ $$ = GridSemanticAction($3, $5); }
+grid: GRID OPEN_PARENTHESIS INTEGER COMMA INTEGER CLOSE_PARENTHESIS						{ $$ = GridSemanticAction($3, $5); }
 	;
 
-checkList: %empty																					{$$ = CheckListSemanticAction(NULL, NULL);}
-	| checkList check																				{ $$ = CheckListSemanticAction($1, $2); }
+checkList: %empty												{$$ = CheckListSemanticAction(NULL, NULL);}
+	| checkList check											{ $$ = CheckListSemanticAction($2, $1); }
 	;
 
-check: OPEN_PARENTHESIS INTEGER COMMA INTEGER CLOSE_PARENTHESIS SEMICOLON							{ $$ = CheckSemanticAction($2, $4); }
+check: OPEN_PARENTHESIS INTEGER COMMA INTEGER CLOSE_PARENTHESIS SEMICOLON					{ $$ = CheckSemanticAction($2, $4); }
 	;
 
-automata: AUTOMATA ruleNumber COMMA grid COLON checkList AUTOMATA_NT								{ $$ = AutomataSemanticAction($2, $4, $6); }
+automata: AUTOMATA ruleNumber COMMA grid COLON checkList AUTOMATA_NT						{ $$ = AutomataSemanticAction($2, $4, $6); }
 	;
 
 data_type: BOOLEAN												{ $$ = DataSemanticAction("bool", $1); }

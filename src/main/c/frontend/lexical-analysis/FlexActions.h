@@ -55,4 +55,6 @@ Token ColorHandlerAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
 
 Token BooleanPatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext);
 
+Token GridSpecificationAction(LexicalAnalyzerContext * lexicalAnalyzerContext);
+
 #endif
