@@ -19,8 +19,12 @@ void shutdownBisonActionsModule();
  */
 
 Constant * IntegerConstantSemanticAction(const int value);
+Grid * GridSemanticAction(const int width, const int height);
+RuleNumber* RuleNumberSemanticAction(const int nAliveToSurvive, const int nAliveToDie, const int nAliveToBeBorn);
 Expression * ArithmeticExpressionSemanticAction(Expression * leftExpression, Expression * rightExpression, ExpressionType type);
 Expression * FactorExpressionSemanticAction(Factor * factor);
+CheckList * CheckListSemanticAction(Check * check, CheckList * next);
+Automata * AutomataSemanticAction(RuleNumber * ruleNumber, Grid * grid, CheckList * checks);
 Factor * ConstantFactorSemanticAction(Constant * constant);
 Factor * ExpressionFactorSemanticAction(Expression * expression);
 Program * ExpressionProgramSemanticAction(CompilerState * compilerState, Expression * expression);

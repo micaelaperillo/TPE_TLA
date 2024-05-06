@@ -24,7 +24,7 @@ static ComputationResult _invalidComputation();
  * Converts and expression type to the proper binary operator. If that's not
  * possible, returns a binary operator that always returns an invalid
  * computation result.
- */
+
 static BinaryOperator _expressionTypeToBinaryOperator(const ExpressionType type) {
 	switch (type) {
 		case ADDITION: return add;
@@ -36,7 +36,7 @@ static BinaryOperator _expressionTypeToBinaryOperator(const ExpressionType type)
 			return _invalidBinaryOperator;
 	}
 }
-
+*/
 /**
  * A binary operator that always returns an invalid computation result.
  */
@@ -101,7 +101,7 @@ ComputationResult computeConstant(Constant * constant) {
 	};
 	return computationResult;
 }
-
+/*
 ComputationResult computeExpression(Expression * expression) {
 	switch (expression->type) {
 		case ADDITION:
@@ -134,3 +134,4 @@ ComputationResult computeFactor(Factor * factor) {
 			return _invalidComputation();
 	}
 }
+*/

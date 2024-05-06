@@ -48,7 +48,7 @@ prop ^prop:[A-Za-z0-9]+$
 "automata"                          { return AutomataFunctionAction(createLexicalAnalyzerContext()); }
 "automatan't"                       { return EndAutomataFunctionAction(createLexicalAnalyzerContext()); }
 
-"rule"                              { return RuleFuncionAction(createLexicalAnalyzerContext()); }
+"rule"                              { return RuleFunctionAction(createLexicalAnalyzerContext()); }
 "rulen't"                           { return EndRuleFunctionAction(createLexicalAnalyzerContext()); }
 
 "grid"                              { return GridSpecificationAction(createLexicalAnalyzerContext()); }
