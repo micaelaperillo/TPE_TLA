@@ -11,6 +11,7 @@
 
 	int integer;
 	Token token;
+	boolean boolean;
 
 	/** Non-terminals. */
 	Automata* automata;
@@ -42,6 +43,7 @@
 /** Terminals. */
 %token <integer> INTEGER
 %token <token> COMMA
+%token <token> BOOLEAN
 %token <token> CLOSE_PARENTHESIS
 %token <token> OPEN_PARENTHESIS
 %token <token> AUTOMATA
@@ -92,7 +94,7 @@ ruleNumber: AUTOMATA OPEN_PARENTHESIS INTEGER COMMA INTEGER COMMA INTEGER CLOSE_
 grid: GRID OPEN_PARENTHESIS INTEGER COMMA INTEGER CLOSE_PARENTHESIS									{ $$ = GridSemanticAction($3, $5); }
 	;
 
-checkList: %empty																					{$$ = CheckListSemanticAct}
+checkList: %empty																					{$$ = CheckListSemanticAction(NULL, NULL);}
 	| checkList check																				{ $$ = CheckListSemanticAction($1, $2); }
 	;
 

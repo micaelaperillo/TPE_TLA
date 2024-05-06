@@ -38,22 +38,7 @@ Constant * IntegerConstantSemanticAction(const int value) {
 	return constant;
 }
 
-Expression * ArithmeticExpressionSemanticAction(Expression * leftExpression, Expression * rightExpression, ExpressionType type) {
-	_logSyntacticAnalyzerAction(__FUNCTION__);
-	Expression * expression = calloc(1, sizeof(Expression));
-	expression->leftExpression = leftExpression;
-	expression->rightExpression = rightExpression;
-	expression->type = type;
-	return expression;
-}
 
-Expression * FactorExpressionSemanticAction(Factor * factor) {
-	_logSyntacticAnalyzerAction(__FUNCTION__);
-	Expression * expression = calloc(1, sizeof(Expression));
-	expression->factor = factor;
-	expression->type = FACTOR;
-	return expression;
-}
 
 Check * CheckSemanticAction(const int x,const int y) {
 	_logSyntacticAnalyzerAction(__FUNCTION__);
@@ -80,21 +65,7 @@ Grid * GridSemanticAction(const int width, const int height) {
 	return grid;
 }
 
-Factor * ConstantFactorSemanticAction(Constant * constant) {
-	_logSyntacticAnalyzerAction(__FUNCTION__);
-	Factor * factor = calloc(1, sizeof(Factor));
-	factor->constant = constant;
-	factor->type = CONSTANT;
-	return factor;
-}
 
-Factor * ExpressionFactorSemanticAction(Expression * expression) {
-	_logSyntacticAnalyzerAction(__FUNCTION__);
-	Factor * factor = calloc(1, sizeof(Factor));
-	factor->expression = expression;
-	factor->type = EXPRESSION;
-	return factor;
-}
 
 CheckList * CheckListSemanticAction(Check * check, CheckList * next) {
 	_logSyntacticAnalyzerAction(__FUNCTION__);
@@ -104,16 +75,8 @@ CheckList * CheckListSemanticAction(Check * check, CheckList * next) {
 	return checkList;
 }
 
-Check * CheckSemanticAction(const int x, const int y) {
-	_logSyntacticAnalyzerAction(__FUNCTION__);
-	Check * check = calloc(1, sizeof(Check));
-	check->x = x;
-	check->y = y;
-	return check;
-}
 
-
-Automata * AutomataSemanticAction(RuleNumber * ruleNumber, Grid * grid, Check * checks) {
+Automata * AutomataSemanticAction(RuleNumber * ruleNumber, Grid * grid, CheckList * checks) {
 	_logSyntacticAnalyzerAction(__FUNCTION__);
 	Automata * automata = calloc(1, sizeof(Automata));
 	automata->ruleNumber = ruleNumber;

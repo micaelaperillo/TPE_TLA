@@ -48,7 +48,7 @@ color #[a-f|A-F|0-9]{6}
 "automata"                          { return AutomataFunctionAction(createLexicalAnalyzerContext()); }
 "automatan't"                       { return EndAutomataFunctionAction(createLexicalAnalyzerContext()); }
 
-"rule"                              { return RuleFuncionAction(createLexicalAnalyzerContext()); }
+"rule"                              { return RuleFunctionAction(createLexicalAnalyzerContext()); }
 "rulen't"                           { return EndRuleFunctionAction(createLexicalAnalyzerContext()); }
 
 "grid"                              { return GridSpecificationAction(createLexicalAnalyzerContext()); }

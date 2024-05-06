@@ -95,10 +95,7 @@ struct Rule {
 	boolean wrapping;
 };
 
-struct PropertyList {
-	void * property;
-	PropertyList * next;
-};
+
 
 
 /**
