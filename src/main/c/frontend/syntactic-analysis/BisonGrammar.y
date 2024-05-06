@@ -57,7 +57,7 @@
 %token <integer> TRUE
 %token <integer> FALSE
 %token <token> GRID
-%token <token> PROPERTY
+%token <string> PROPERTY
 
 
 /** Non-terminals. */
@@ -109,23 +109,23 @@ automata: AUTOMATA ruleNumber COMMA grid COLON checkList AUTOMATA_NT								{ $$
 rule_header: RULE COLON
 	;
 
-data_type: BOOLEAN
-    | COLOR_HANDLER
-    | INTEGER
+data_type: BOOLEAN												{ $$ = DataSemanticAction("bool", $1); }
+    | COLOR_HANDLER												{ $$ = DataSemanticAction("color", $1); }
+    | INTEGER													{ $$ = DataSemanticAction("int", $1); }
     ;
 
-parameter_list: data_type
-    | parameter_list COMMA data_type
+parameter_list: data_type											{ $$ = ParameterListSemanticAction($1, NULL); }
+    | parameter_list COMMA data_type										{ $$ = ParameterListSemanticAction($3, $1); }
     ;
 
-property: PROPERTY EQUAL OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS SEMICOLON
+property: PROPERTY EQUAL OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS SEMICOLON				{ $$ = PropertySemanticAction($1, $4); }
     ;
 
-property_list: %empty
-    | property_list property
+property_list: %empty												{ $$ = PropertyListSemanticAction(NULL, NULL); }
+    | property_list property											{ $$ = PropertyListSemanticAction($2, $1); }
     ;
 
-rule: rule_header property_list RULE_NT
+rule: rule_header property_list RULE_NT										{ $$ = RuleSemanticAction($2); }
 	;
 
 %%

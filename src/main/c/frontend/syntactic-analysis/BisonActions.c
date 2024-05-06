@@ -38,6 +38,29 @@ Constant * IntegerConstantSemanticAction(const int value) {
 	return constant;
 }
 
+Data * DataSemanticAction(char * dataType, int value) {
+    _logSyntacticAnalyzerAction(__FUNCTION__);
+    Data * data = calloc(1, sizeof(Data));
+    data->value = value;
+    return data;
+}
+
+ParameterList * ParameterListSemanticAction(Data * data, ParameterList * next) {
+    _logSyntacticAnalyzerAction(__FUNCTION__);
+    ParameterList * parameterList = calloc(1, sizeof(ParameterList));
+    parameterList->data = data;
+    parameterList->next = next;
+    return parameterList;
+}
+
+PropertyList * PropertyListSemanticAction(Property * property, PropertyList * next) {
+    _logSyntacticAnalyzerAction(__FUNCTION__);
+    PropertyList * propertyList = calloc(1, sizeof(PropertyList));
+    propertyList->property = property;
+    propertyList->next = next;
+    return propertyList;
+}
+
 Expression * ArithmeticExpressionSemanticAction(Expression * leftExpression, Expression * rightExpression, ExpressionType type) {
 	_logSyntacticAnalyzerAction(__FUNCTION__);
 	Expression * expression = calloc(1, sizeof(Expression));
@@ -119,6 +142,14 @@ Automata * AutomataSemanticAction(RuleNumber * ruleNumber, Grid * grid, Check * 
 	automata->ruleNumber = ruleNumber;
 	automata->grid = grid;
 	automata->checks = checks;
+    return automata;
+}
+
+Rule * RuleSemanticAction(PropertyList * properties) {
+    _logSyntacticAnalyzerAction(__FUNCTION__);
+    Rule * rule = calloc(1, sizeof(Rule));
+    rule->properties = properties;
+    return rule;
 }
 
 Program * ExpressionProgramSemanticAction(CompilerState * compilerState, Expression * expression) {
