@@ -69,7 +69,17 @@ Token ArithmeticOperatorLexemeAction(LexicalAnalyzerContext * lexicalAnalyzerCon
 
 Token IntegerLexemeAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
 	_logLexicalAnalyzerContext(__FUNCTION__, lexicalAnalyzerContext);
-	lexicalAnalyzerContext->semanticValue->integer = atoi(lexicalAnalyzerContext->lexeme);
+    char * num;
+    int modifier;
+    if(lexicalAnalyzerContext->lexeme[0] == '-') {
+        num = lexicalAnalyzerContext->lexeme + 1;
+        modifier = -1;
+    }
+    else {
+        num = lexicalAnalyzerContext->lexeme;
+        modifier = 1;
+    }
+	lexicalAnalyzerContext->semanticValue->integer = atoi(lexicalAnalyzerContext->lexeme) * modifier;
 	return INTEGER;
 }
 

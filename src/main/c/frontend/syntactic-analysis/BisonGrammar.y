@@ -97,7 +97,7 @@ ruleNumber: OPEN_PARENTHESIS INTEGER COMMA INTEGER COMMA INTEGER CLOSE_PARENTHES
 grid: GRID OPEN_PARENTHESIS INTEGER COMMA INTEGER CLOSE_PARENTHESIS						{ $$ = GridSemanticAction($3, $5); }
 	;
 
-checkList: %empty												{$$ = CheckListSemanticAction(NULL, NULL);}
+checkList: check												{$$ = CheckListSemanticAction($1, NULL);}
 	| checkList check											{ $$ = CheckListSemanticAction($2, $1); }
 	;
 

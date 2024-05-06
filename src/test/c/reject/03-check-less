@@ -1,0 +1,9 @@
+automata (3,4,3), grid (100,100):
+
+automatan't
+
+rule:
+     prop:color = (#FFFFFF, #000FFD, #12DCFF);
+     prop:bg_color = (#000000, #FFFFFF);
+     prop:wrapping = (true);
+rulen't
