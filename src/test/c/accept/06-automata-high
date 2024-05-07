@@ -1,0 +1,21 @@
+automata (8,9,7), grid (500,500):
+     check(1,0);
+     check(-1,-1);
+     check(2,-1);
+     check(-1,0);
+     check(-1,1);
+     check(-2,-1);
+     check(1,3);
+     check(-3,-1);
+     check(2,-3);
+automatan't
+
+rule:
+     prop:color = (#FFFFFF, #000FFD, #12DCFF, #010203, #FFEEDD);
+     prop:bg_color = (#000000, #FFFFFF);
+     prop:wrapping = (true);
+     prop:window_width = (1280);
+     prop:window_height = (768);
+     prop:min_time_between_updates = (1);
+     prop:initial_cells = (12, 245, 678, 209);
+rulen't

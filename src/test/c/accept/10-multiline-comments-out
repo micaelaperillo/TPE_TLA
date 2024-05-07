@@ -1,0 +1,22 @@
+/* this is a comment
+I'm outside this time
+*/
+
+
+automata (3,4,3), grid (100,100):
+     check(1,0);
+     check(-1,-1);
+     check(2,-1);
+automatan't
+
+/* this time I'm in the middle
+*/
+
+rule:
+     prop:color = (#FFFFFF, #000FFD, #12DCFF);
+     prop:bg_color = (#000000, #FFFFFF);
+     prop:wrapping = (true);
+rulen't
+
+
+/* yet another comment also outside */

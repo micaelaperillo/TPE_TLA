@@ -88,7 +88,8 @@
 %%
 
 program: automata rule												{ $$ = AutomataProgramSemanticAction(currentCompilerState(), $1, $2); }
-	| rule automata												{ $$ = AutomataProgramSemanticAction(currentCompilerState(), $2, $1); }
+	| rule automata												    { $$ = AutomataProgramSemanticAction(currentCompilerState(), $2, $1); }
+	| automata                                                      { $$ = AutomataProgramSemanticAction(currentCompilerState(), $1, NULL); }
 	;
 
 ruleNumber: OPEN_PARENTHESIS INTEGER COMMA INTEGER COMMA INTEGER CLOSE_PARENTHESIS				{ $$ = RuleNumberSemanticAction($2, $4, $6); }

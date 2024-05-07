@@ -1,0 +1,5 @@
+automata (3,4,3), grid (100,100):
+     check(1,0);
+     check(-1,-1);
+     check(2,-1);
+automatan't
