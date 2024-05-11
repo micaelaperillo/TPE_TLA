@@ -7,11 +7,11 @@ Se brindarán dos modalidades distintas de uso del lenguaje. La primera consisti
 
 El lenguaje generará una salida en Python, utilizando la librería PyGame para poder visualizar el autómata y que el usuario interactúe con el mismo en caso de que sea en dos dimensiones.
 
-La nomenclatura para los autómatas en dos dimensiones será la siguiente: A/D/B/V, en donde cada letra significa
+La nomenclatura para los autómatas en dos dimensiones será la siguiente: A/D/B, en donde cada letra significa
 
     A: Cantidad de vecinos vivos para que la célula siga viva, sino muere de soledad
     D: Cantidad de vecinos vivos para que la célula muera por sobrepoblación
     B: Cantidad de vecinos vivos para que una célula nazca en una celda vacía
-    V: Regla de vecindad, podra ser Moore (M), Von Neumann (VN) o creada por el usuario (U) y el rango especificado. Por ejemplo. M(2) es la distancia de Moore con rango dos. 
+
     
 La extensión de los archivos será .CAL9K.
