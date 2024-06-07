@@ -109,9 +109,26 @@ struct Rule {
 /**
  * Node recursive destructors.
  */
-void releaseConstant(Constant * constant);
-void releaseExpression(Expression * expression);
-void releaseFactor(Factor * factor);
 void releaseProgram(Program * program);
+
+void releaseAutomata(Automata* automata);
+
+void releaseRule(Rule* rule);
+
+void releaseRuleNumber(RuleNumber* ruleNumber);
+
+void releaseGrid(Grid* grid);
+
+void releaseCheckList(CheckList* checkList);
+
+void releaseCheck(Check* check);
+
+void releasePropertyList(PropertyList* propertyList);
+
+void releaseProperty(Property* property);
+
+void releaseParameterList(ParameterList* parameterList);
+
+void releaseData(Data* data);
 
 #endif
