@@ -61,11 +61,19 @@ AutomataResult computeGrid(Grid * grid) {
     }
 }
 
-AutomataResult computeCheckList(CheckList * checkList) {
-    //TODO checkear que no haga checks con valores mayores a compute grid
+
+AutomataResult computeCheckList(CheckList * checkList,Grid* grid) {
+    //TODO: reemplazar AutomataResult por booleano maybe?
+    CheckList* current=checkList;
     AutomataResult automataResult = {
             .succeed = true,
             .value = 0
     };
+    while(current){
+        if(current->check->x>grid->width ||current->check->y>grid->height ){
+            return _invalidComputation();
+        }
+        current=current->next;
+    }
     return automataResult;
 }
