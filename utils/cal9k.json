@@ -1,0 +1,15 @@
+{
+  "na_to_survive"             : 0,
+  "na_to_die"                 : 0,
+  "na_to_be_born"             : 0,
+  "grid_width"                : 4,
+  "grid_height"               : 4,
+  "checks"                    : [],
+  "initial_cells"             : [],
+  "window_width"              : 800,
+  "window_height"             : 600,
+  "wrapping"                  : true,
+  "min_time_between_updates"  : 1,
+  "color"                     : ["#FFFFFF"],
+  "bg_color"                  : ["#000000", "#FFFFFF"]
+}

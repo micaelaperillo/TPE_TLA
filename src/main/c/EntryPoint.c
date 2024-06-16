@@ -1,5 +1,6 @@
 #include "backend/code-generation/Generator.h"
-#include "backend/domain-specific/Calculator.h"
+#include "backend/domain-specific/Automata.h"
+#include "backend/domain-specific/Rule.h"
 #include "frontend/lexical-analysis/FlexActions.h"
 #include "frontend/syntactic-analysis/AbstractSyntaxTree.h"
 #include "frontend/syntactic-analysis/BisonActions.h"
@@ -18,8 +19,9 @@ const int main(const int count, const char ** arguments) {
 	initializeBisonActionsModule();
 	initializeSyntacticAnalyzerModule();
 	initializeAbstractSyntaxTreeModule();
-	//initializeCalculatorModule();
-	//initializeGeneratorModule();
+	initializeAutomataModule();
+    initializeRuleModule();
+	initializeGeneratorModule();
 
 	// Logs the arguments of the application.
 	for (int k = 0; k < count; ++k) {
@@ -37,17 +39,18 @@ const int main(const int count, const char ** arguments) {
 	if (syntacticAnalysisStatus == ACCEPT) {
 		logDebugging(logger, "Computing expression value...");
 		Program * program = compilerState.abstractSyntaxtTree;
-		/*ComputationResult computationResult = computeExpression(program->expression);
-		if (computationResult.succeed) {
-			compilerState.value = computationResult.value;
-			generate(&compilerState);
-		}
-		else {
-			logError(logger, "The computation phase rejects the input program.");
-			compilationStatus = FAILED;
-		}*/
+        AutomataResult automataResult = computeAutomata(program->automata); //TODO se podria mergear automata y rule en un mismo check
+        RuleResult ruleResult = computeRule(program->rule);
+        if (automataResult.succeed && ruleResult.succeed) {
+            compilerState.value = 0; //TODO hacerlo dinamico a partir de los valores de rule y automata
+            generate(&compilerState);
+        }
+        else {
+            logError(logger, "Todo roto"); //TODO hacer que el error dependa de lo que devolvio automata o rule
+            compilationStatus = FAILED;
+        }
 		logDebugging(logger, "Releasing AST resources...");
-		//releaseProgram(program);
+		releaseProgram(program);
 	}
 	else {
 		logError(logger, "The syntactic-analysis phase rejects the input program.");
@@ -55,8 +58,9 @@ const int main(const int count, const char ** arguments) {
 	}
 
 	logDebugging(logger, "Releasing modules resources...");
-	//shutdownGeneratorModule();
-	//shutdownCalculatorModule();
+	shutdownGeneratorModule();
+	shutdownAutomataModule();
+    shutdownRuleModule();
 	shutdownAbstractSyntaxTreeModule();
 	shutdownSyntacticAnalyzerModule();
 	shutdownBisonActionsModule();

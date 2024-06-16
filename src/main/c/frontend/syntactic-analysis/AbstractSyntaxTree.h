@@ -38,11 +38,6 @@ typedef struct BgColors BgColors;
  * Node types for the Abstract Syntax Tree (AST).
  */
 
-enum FactorType {
-	CONSTANT,
-	EXPRESSION
-};
-
 struct Constant {
 	int value;
 };
