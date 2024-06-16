@@ -25,7 +25,7 @@ static AutomataResult _invalidComputation() {
 AutomataResult computeAutomata(Automata * automata) {
     if (!computeRuleNumbers(automata->ruleNumber).succeed
     || !computeGrid(automata->grid).succeed
-    || !computeCheckList(automata->checks).succeed) {
+    || !computeCheckList(automata->checks,automata->grid).succeed){
         return _invalidComputation();
     } else {
         AutomataResult automataResult = {
