@@ -57,6 +57,7 @@ add_executable(Compiler
 	src/main/c/backend/domain-specific/Calculator.c
 	src/main/c/backend/domain-specific/Program.c
 	src/main/c/backend/domain-specific/Properties.c
+	src/main/c/backend/type-checking/PropertyTypeCheck.c
 	src/main/c/EntryPoint.c
 	src/main/c/frontend/lexical-analysis/FlexActions.c
 	src/main/c/frontend/lexical-analysis/FlexScanner.c

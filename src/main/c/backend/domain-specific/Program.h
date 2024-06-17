@@ -18,7 +18,8 @@ enum ErrorCode {
     INVALID_PARAMETER_AMOUNT,
     ILLEGAL_CHECK,
     INVALID_GRID,
-    INVALID_PROPERTY
+    INVALID_PROPERTY,
+    REDEFINED_PROPERTY
 };
 
 /** Initialize module's internal state. */

@@ -63,6 +63,9 @@ const int main(const int count, const char ** arguments) {
                 case INVALID_PROPERTY:
                     msg = "INVALID_PROPERTY : a specified property does not exist.";
                     break;
+                case REDEFINED_PROPERTY:
+                    msg = "REDEFINED_PROPERTY : a property was redefined.";
+                    break;
                 case UNSPECIFIED_ERROR:
                     msg = "UNSPECIFIED_ERROR : todo roto.";
                     break;

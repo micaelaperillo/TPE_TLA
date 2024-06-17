@@ -10,7 +10,8 @@ enum PropertyReturnCodes {
     OK,
     INVALID_PARAM_TYPE,
     INVALID_PARAM_AMOUNT,
-    INVALID_PROP
+    INVALID_PROP,
+    DUPLICATE_PROP
 };
 
 int isPropertyValid(char * propertyName, ParameterList * parameterList);

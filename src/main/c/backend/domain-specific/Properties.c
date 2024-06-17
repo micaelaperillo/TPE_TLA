@@ -1,6 +1,7 @@
 #include <string.h>
 #include "Properties.h"
 #include "../../frontend/syntactic-analysis/BisonParser.h"
+#include "../type-checking/PropertyTypeCheck.h"
 
 struct Prop {
     char * name;
@@ -28,7 +29,7 @@ int checkParameters(ParameterList * parameterList, Token type, int maxParams);
 int isPropertyValid(char * propertyName, ParameterList * parameterList) {
     int i = 0;
     while (properties[i] != NULL) {
-        if (strcmp(propertyName, properties[i]->name) == 0) {
+        if (strcmp(propertyName, properties[i]->name) == 0 && isPropertyUnique(propertyName)) {
             return checkParameters(parameterList, properties[i]->type, properties[i]->paramAmount);
         }
         i++;

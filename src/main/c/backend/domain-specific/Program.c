@@ -1,5 +1,6 @@
 #include "Program.h"
 #include "Properties.h"
+#include "../type-checking/PropertyTypeCheck.h"
 
 ProgramResult computeAutomata(Automata * automata);
 
@@ -11,7 +12,6 @@ ProgramResult computeCheckList(CheckList * checkList, Grid* grid);
 
 ProgramResult computeRule(Rule * rule);
 
-ProgramResult computeProperty(Property * property);
 
 /* MODULE INTERNAL STATE */
 
@@ -61,16 +61,23 @@ ProgramResult computeRule(Rule *rule) {
             case OK:
                 break;
             case INVALID_PARAM_AMOUNT:
+                releasePropertyNameList();
                 return _invalidComputation(INVALID_PARAMETER_AMOUNT);
             case INVALID_PARAM_TYPE:
+                releasePropertyNameList();
                 return _invalidComputation(INVALID_PARAMETER_TYPE);
             case INVALID_PROP:
+                releasePropertyNameList();
                 return _invalidComputation(INVALID_PROPERTY);
+            case DUPLICATE_PROP:
+                releasePropertyNameList();
+                return _invalidComputation(REDEFINED_PROPERTY);
             default:
                 break;
         }
         curr = curr->next;
     }
+    releasePropertyNameList();
     ProgramResult programResult = {
             .succeed = true,
             .value = 0
