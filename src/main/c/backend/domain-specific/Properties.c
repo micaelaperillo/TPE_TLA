@@ -39,11 +39,15 @@ int isPropertyValid(char * propertyName, ParameterList * parameterList) {
 int checkParameters(ParameterList * parameterList, char * type, int maxParams) {
     int i = 0;
     ParameterList * curr = parameterList;
-    while((maxParams == UNDEFINED || i < maxParams) && curr != NULL) {
+    while(curr != NULL) {
+        if (maxParams != UNDEFINED && i >= maxParams) {
+            return 0;
+        }
         if (strcmp(curr->data->dataType, type) != 0) {
             return 0;
         }
         curr = curr->next;
+        i++;
     }
     return 1;
 }
