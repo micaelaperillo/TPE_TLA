@@ -2,9 +2,12 @@
 
 /* MODULE INTERNAL STATE */
 
-const char _indentationCharacter = ' ';
-const char _indentationSize = 4;
+#define INDENTATION_CHARACTER '\t'
+#define INDENTATION_SIZE 1
+
 static Logger * _logger = NULL;
+
+FILE* pyFileOutput;
 
 void initializeGeneratorModule() {
 	_logger = createLogger("Generator");
@@ -20,13 +23,11 @@ void shutdownGeneratorModule() {
 
 static const char _expressionTypeToCharacter(const ExpressionType type);
 static void _generateConstant(const unsigned int indentationLevel, Constant * constant);
-static void _generateEpilogue(const int value);
-static void _generateExpression(const unsigned int indentationLevel, Expression * expression);
-static void _generateFactor(const unsigned int indentationLevel, Factor * factor);
+static void _generateEpilogue();
 static void _generateProgram(Program * program);
 static void _generatePrologue(void);
 static char * _indentation(const unsigned int indentationLevel);
-static void _output(const unsigned int indentationLevel, const char * const format, ...);
+static void _output(FILE* file,const unsigned int indentationLevel, const char * const format, ...);
 
 /**
  * Converts and expression type to the proper character of the operation
@@ -54,91 +55,41 @@ static void _generateConstant(const unsigned int indentationLevel, Constant * co
 }
 
 /**
- * Creates the epilogue of the generated output, that is, the final lines that
- * completes a valid Latex document.
+ * Creates ending footing of the program
  */
-static void _generateEpilogue(const int value) {
-	_output(0, "%s%d%s",
-		"            [ $", value, "$, circle, draw, blue ]\n"
-		"        ]\n"
-		"    \\end{forest}\n"
-		"\\end{document}\n\n"
-	);
+static void _generateEpilogue() {
+	_output(pyFileOutput,0, "%s","if __name__ == \"__main__\":\n");
+	_output(pyFileOutput,1,"%s","main()\n");
 }
 
-/**
- * Generates the output of an expression.
 
-static void _generateExpression(const unsigned int indentationLevel, Expression * expression) {
-	_output(indentationLevel, "%s", "[ $E$, circle, draw, black!20\n");
-	switch (expression->type) {
-		case ADDITION:
-		case DIVISION:
-		case MULTIPLICATION:
-		case SUBTRACTION:
-			_generateExpression(1 + indentationLevel, expression->leftExpression);
-			_output(1 + indentationLevel, "%s%c%s", "[ $", _expressionTypeToCharacter(expression->type), "$, circle, draw, purple ]\n");
-			_generateExpression(1 + indentationLevel, expression->rightExpression);
-			break;
-		case FACTOR:
-			_generateFactor(1 + indentationLevel, expression->factor);
-			break;
-		default:
-			logError(_logger, "The specified expression type is unknown: %d", expression->type);
-			break;
-	}
-	_output(indentationLevel, "%s", "]\n");
-}
-*/
-/**
- * Generates the output of a factor.
- */
-
-
-/**
- * Generates the output of the program.
- */
 static void _generateProgram(Program * program) {
 	//_generateExpression(3, program->expression);
 }
 
 /**
- * Creates the prologue of the generated output, a Latex document that renders
- * a tree thanks to the Forest package.
- *
- * @see https://ctan.dcc.uchile.cl/graphics/pgf/contrib/forest/forest-doc.pdf
+ * Creates the necessary imports for the program
  */
 static void _generatePrologue(void) {
-	_output(0, "%s",
-		"\\documentclass{standalone}\n\n"
-		"\\usepackage[utf8]{inputenc}\n"
-		"\\usepackage[T1]{fontenc}\n"
-		"\\usepackage{amsmath}\n"
-		"\\usepackage{forest}\n"
-		"\\usepackage{microtype}\n\n"
-		"\\begin{document}\n"
-		"    \\centering\n"
-		"    \\begin{forest}\n"
-		"        [ \\text{$=$}, circle, draw, purple\n"
-	);
+	_output(pyFileOutput, "%s","import pygame\nimport numpy as np\n import time\n import tk as tk\n");
 }
 
 /**
  * Generates an indentation string for the specified level.
  */
 static char * _indentation(const unsigned int level) {
-	//return indentation(_indentationCharacter, level, _indentationSize);
+	return indentation(INDENTATION_CHARACTER, level, INDENTATION_SIZE);
 }
 
 /**
  * Outputs a formatted string to standard output.
  */
-static void _output(const unsigned int indentationLevel, const char * const format, ...) {
+static void _output(FILE* file,const unsigned int indentationLevel, const char * const format, ...) {
 	va_list arguments;
 	va_start(arguments, format);
 	char * indentation = _indentation(indentationLevel);
 	char * effectiveFormat = concatenate(2, indentation, format);
-	vfprintf(stdout, effectiveFormat, arguments);
+	vfprintf(file, effectiveFormat, arguments);
 	free(effectiveFormat);
 	free(indentation);
 	va_end(arguments);
@@ -150,6 +101,6 @@ void generate(CompilerState * compilerState) {
 	logDebugging(_logger, "Generating final output...");
 	_generatePrologue();
 	_generateProgram(compilerState->abstractSyntaxtTree);
-	_generateEpilogue(compilerState->value);
+	_generateEpilogue();
 	logDebugging(_logger, "Generation is done.");
 }
