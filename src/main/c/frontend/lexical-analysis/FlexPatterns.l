@@ -36,8 +36,8 @@ keyword [A-Za-z0-9_-]+
 <MULTILINE_COMMENT>[^*]+			{ IgnoredLexemeAction(createLexicalAnalyzerContext()); }
 <MULTILINE_COMMENT>.				{ IgnoredLexemeAction(createLexicalAnalyzerContext()); }
 
-"("									{ return ParenthesisLexemeAction(createLexicalAnalyzerContext()); }
-")"									{ return ParenthesisLexemeAction(createLexicalAnalyzerContext()); }
+"("									{ return OpenParenthesisLexemeAction(createLexicalAnalyzerContext()); }
+")"									{ return CloseParenthesisLexemeAction(createLexicalAnalyzerContext()); }
 ":"                                 { return ColonPatternAction(createLexicalAnalyzerContext()); }
 ";"                                 { return SemicolonPatternAction(createLexicalAnalyzerContext()); }
 ","                                 { return CommaPatternAction(createLexicalAnalyzerContext()); }
@@ -58,8 +58,8 @@ keyword [A-Za-z0-9_-]+
 "prop"                              { return PropertyPatternAction(createLexicalAnalyzerContext()); }
 
 {color}                             { return ColorHandlerAction(createLexicalAnalyzerContext()); }
-"true"                              { return BooleanPatternAction(createLexicalAnalyzerContext()); }
-"false"                             { return BooleanPatternAction(createLexicalAnalyzerContext()); }
+"true"                              { return TrueValuePatternAction(createLexicalAnalyzerContext()); }
+"false"                             { return FalseValuePatternAction(createLexicalAnalyzerContext()); }
 -?[[:digit:]]+					    { return IntegerLexemeAction(createLexicalAnalyzerContext()); }
 {keyword}                           { return KeywordPatternAction(createLexicalAnalyzerContext()); }
 .									{ return UnknownLexemeAction(createLexicalAnalyzerContext()); }
