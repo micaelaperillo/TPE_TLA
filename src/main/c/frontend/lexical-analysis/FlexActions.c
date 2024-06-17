@@ -54,18 +54,6 @@ void IgnoredLexemeAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
 	}
 }
 
-Token ArithmeticOperatorLexemeAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
-	_logLexicalAnalyzerContext(__FUNCTION__, lexicalAnalyzerContext);
-	Token token;
-	switch (lexicalAnalyzerContext->lexeme[0]) {
-		case '-': token = SUB; break;
-		case '*': token = MUL; break;
-		case '/': token = DIV; break;
-		case '+': token = ADD; break;
-	}
-	lexicalAnalyzerContext->semanticValue->token = token;
-	return token;
-}
 
 Token IntegerLexemeAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
 	_logLexicalAnalyzerContext(__FUNCTION__, lexicalAnalyzerContext);
@@ -83,15 +71,15 @@ Token IntegerLexemeAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
 	return INTEGER;
 }
 
-Token ParenthesisLexemeAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+Token OpenParenthesisLexemeAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
 	_logLexicalAnalyzerContext(__FUNCTION__, lexicalAnalyzerContext);
-	Token token;
-	switch (lexicalAnalyzerContext->lexeme[0]) {
-		case '(': token = OPEN_PARENTHESIS; break;
-		case ')': token = CLOSE_PARENTHESIS; break;
-	}
-	lexicalAnalyzerContext->semanticValue->token = token;
-	return token;
+	lexicalAnalyzerContext->semanticValue->token = OPEN_PARENTHESIS;
+	return OPEN_PARENTHESIS;
+}
+Token CloseParenthesisLexemeAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+	_logLexicalAnalyzerContext(__FUNCTION__, lexicalAnalyzerContext);
+	lexicalAnalyzerContext->semanticValue->token = CLOSE_PARENTHESIS;
+	return CLOSE_PARENTHESIS;
 }
 
 Token UnknownLexemeAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
@@ -173,14 +161,14 @@ Token ColorHandlerAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
 	return COLOR_HANDLER;
 }
 
-Token BooleanPatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+Token TrueValuePatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
 	_logLexicalAnalyzerContext(__FUNCTION__, lexicalAnalyzerContext);
-	int integer = 0;
-	switch (lexicalAnalyzerContext->lexeme[0]) {
-		case 't': integer = 1; break;
-		case 'f': integer = 0; break;
-	}
-	lexicalAnalyzerContext->semanticValue->integer = integer;
+	lexicalAnalyzerContext->semanticValue->integer = true;
+	return BOOLEAN;
+}
+Token FalseValuePatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
+	_logLexicalAnalyzerContext(__FUNCTION__, lexicalAnalyzerContext);
+	lexicalAnalyzerContext->semanticValue->integer = false;
 	return BOOLEAN;
 }
 

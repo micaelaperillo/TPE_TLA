@@ -27,7 +27,8 @@ void IgnoredLexemeAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
 
 Token ArithmeticOperatorLexemeAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
 Token IntegerLexemeAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
-Token ParenthesisLexemeAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
+Token OpenParenthesisLexemeAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
+Token CloseParenthesisLexemeAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
 
 Token UnknownLexemeAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
 
@@ -53,7 +54,8 @@ Token PropertyPatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext);
 
 Token ColorHandlerAction(LexicalAnalyzerContext *lexicalAnalyzerContext);
 
-Token BooleanPatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext);
+Token TrueValuePatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext);
+Token FalseValuePatternAction(LexicalAnalyzerContext * lexicalAnalyzerContext);
 
 Token GridSpecificationAction(LexicalAnalyzerContext * lexicalAnalyzerContext);
 
