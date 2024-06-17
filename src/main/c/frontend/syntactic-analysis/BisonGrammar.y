@@ -120,7 +120,7 @@ parameter_list: data_type											{ $$ = ParameterListSemanticAction($1, NULL)
 property: PROPERTY COLON KEYWORD EQUAL OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS SEMICOLON		{ $$ = PropertySemanticAction($3, $6); }
     ;
 
-property_list: %empty												{ $$ = PropertyListSemanticAction(NULL, NULL); }
+property_list: property                                                          { $$ = PropertyListSemanticAction($1, NULL); }
     | property_list property											{ $$ = PropertyListSemanticAction($2, $1); }
     ;
 

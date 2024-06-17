@@ -41,7 +41,7 @@ ProgramResult computeProgram(Program * program) {
     if (!computeAutomata(program->automata).succeed) {
         return _invalidComputation();
     }
-    if (!computeRule(program->rule).succeed) {
+    if (program->rule != NULL && !computeRule(program->rule).succeed) {
         return _invalidComputation();
     }
     ProgramResult programResult = {
@@ -51,16 +51,14 @@ ProgramResult computeProgram(Program * program) {
     return programResult;
 }
 
-ProgramResult computeRule(Rule * rule) {
-    PropertyList * curr = rule->properties;
-    PropertyList * next = rule->properties->next;
-    while(curr != NULL) {
-        Property * prop = curr->property;
+ProgramResult computeRule(Rule *rule) {
+    PropertyList *curr = rule->properties;
+    while (curr != NULL) {
+        Property *prop = curr->property;
         if (!isPropertyValid(prop->propertyName, prop->parameters)) {
             return _invalidComputation();
         }
-        curr = next;
-        next = curr->next;
+        curr = curr->next;
     }
     ProgramResult programResult = {
             .succeed = true,

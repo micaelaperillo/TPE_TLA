@@ -124,6 +124,7 @@ Program * AutomataProgramSemanticAction(CompilerState * compilerState, Automata 
     _logSyntacticAnalyzerAction(__FUNCTION__);
     Program * program = calloc(1, sizeof(Program));
     program->automata = automata;
+    program->rule = rule;
     compilerState->abstractSyntaxtTree = program;
     if (0 < flexCurrentContext()) {
         logError(_logger, "The final context is not the default (0): %d", flexCurrentContext());

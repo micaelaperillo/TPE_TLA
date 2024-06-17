@@ -110,7 +110,6 @@ void releaseParameterList(ParameterList* parameterList) {
 void releaseData(Data* data) {
     logDebugging(_logger, "Executing destructor: %s", __FUNCTION__);
     if (data != NULL) {
-        free(data->dataType);
         free(data);
     }
 }
