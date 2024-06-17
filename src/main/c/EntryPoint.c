@@ -40,7 +40,7 @@ const int main(const int count, const char ** arguments) {
         ProgramResult programResult = computeProgram(program);
         if (programResult.succeed) {
             compilerState.value = 0;
-            //generate(&compilerState);
+            generate(&compilerState);
         }
         else {
             char * msg;

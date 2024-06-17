@@ -24,3 +24,6 @@ cmake-build-debug
 BisonParser.c
 BisonParser.h
 FlexScanner.c
+
+# output File
+game_Of_Life.py

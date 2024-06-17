@@ -19,7 +19,7 @@ if (CMAKE_C_COMPILER_ID STREQUAL "GNU")
 	add_compile_options(-static-libgcc)
 	add_compile_options(-std=gnu99)
 	add_compile_options(-O3)
-
+	add_compile_options(-g)
 	# Compiles the scanner with Flex.
 	add_custom_command(
 		OUTPUT ../src/main/c/frontend/lexical-analysis/FlexScanner.c
