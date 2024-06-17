@@ -30,6 +30,6 @@ AutomataResult computeRuleNumbers(RuleNumber * ruleNumber);
 
 AutomataResult computeGrid(Grid * grid);
 
-AutomataResult computeCheckList(CheckList * checkList);
+AutomataResult computeCheckList(CheckList * checkList,Grid* grid);
 
 #endif //AUTOMATA_HEADER
