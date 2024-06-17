@@ -29,20 +29,21 @@ void shutdownAutomataModule() {
 
 //TODO: hacer que se devuelva un codigo de error dependiendo del caso
 
-static ProgramResult _invalidComputation() {
+static ProgramResult _invalidComputation(int value) {
     ProgramResult programResult = {
             .succeed = false,
-            .value = 0
+            .value = value
     };
     return programResult;
 }
 
 ProgramResult computeProgram(Program * program) {
-    if (!computeAutomata(program->automata).succeed) {
-        return _invalidComputation();
+    ProgramResult result;
+    if (!(result = computeAutomata(program->automata)).succeed) {
+        return result;
     }
-    if (program->rule != NULL && !computeRule(program->rule).succeed) {
-        return _invalidComputation();
+    if (program->rule != NULL && !(result = computeRule(program->rule)).succeed) {
+        return result;
     }
     ProgramResult programResult = {
             .succeed = true,
@@ -55,8 +56,18 @@ ProgramResult computeRule(Rule *rule) {
     PropertyList *curr = rule->properties;
     while (curr != NULL) {
         Property *prop = curr->property;
-        if (!isPropertyValid(prop->propertyName, prop->parameters)) {
-            return _invalidComputation();
+        int ret = isPropertyValid(prop->propertyName, prop->parameters);
+        switch (ret) {
+            case OK:
+                break;
+            case INVALID_PARAM_AMOUNT:
+                return _invalidComputation(INVALID_PARAMETER_AMOUNT);
+            case INVALID_PARAM_TYPE:
+                return _invalidComputation(INVALID_PARAMETER_TYPE);
+            case INVALID_PROP:
+                return _invalidComputation(INVALID_PROPERTY);
+            default:
+                break;
         }
         curr = curr->next;
     }
@@ -86,11 +97,9 @@ ProgramResult computeAutomata(Automata * automata) {
 }
 
 ProgramResult computeRuleNumbers(RuleNumber * ruleNumber) {
-    if (ruleNumber->neighboursAliveToBeBorn > ruleNumber->neighboursAliveToDie) {
-        return _invalidComputation();
-    }
-    if (ruleNumber->neighboursAliveToSurvive > ruleNumber->neighboursAliveToDie) {
-        return _invalidComputation();
+    if (ruleNumber->neighboursAliveToBeBorn > ruleNumber->neighboursAliveToDie
+    || ruleNumber->neighboursAliveToSurvive > ruleNumber->neighboursAliveToDie) {
+        return _invalidComputation(INVALID_AUTOMATA_NUMBERS);
     }
     ProgramResult programResult = {
             .succeed = true,
@@ -101,7 +110,7 @@ ProgramResult computeRuleNumbers(RuleNumber * ruleNumber) {
 
 ProgramResult computeGrid(Grid * grid) {
     if (grid->height == 0 || grid->width == 0) {
-        return _invalidComputation();
+        return _invalidComputation(INVALID_GRID);
     } else {
         ProgramResult programResult = {
                 .succeed = true,
@@ -120,7 +129,7 @@ ProgramResult computeCheckList(CheckList * checkList,Grid* grid) {
     };
     while(current){
         if(current->check->x>grid->width ||current->check->y>grid->height ){
-            return _invalidComputation();
+            return _invalidComputation(ILLEGAL_CHECK);
         }
         current=current->next;
     }

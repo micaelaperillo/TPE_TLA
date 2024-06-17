@@ -39,11 +39,38 @@ const int main(const int count, const char ** arguments) {
 		Program * program = compilerState.abstractSyntaxtTree;
         ProgramResult programResult = computeProgram(program);
         if (programResult.succeed) {
-            compilerState.value = 0; //TODO hacerlo dinamico a partir de los valores de rule y automata
+            compilerState.value = 0;
             //generate(&compilerState);
         }
         else {
-            logError(logger, "Todo roto"); //TODO hacer que el error dependa de lo que devolvio automata o rule
+            char * msg;
+            switch(programResult.value) {
+                case INVALID_AUTOMATA_NUMBERS:
+                    msg = "INVALID_AUTOMATA_NUMBERS : the automata definition numbers are invalid.";
+                    break;
+                case INVALID_PARAMETER_TYPE:
+                    msg = "INVALID_PARAMETER_TYPE : a property is receiving invalid parameter types.";
+                    break;
+                case INVALID_PARAMETER_AMOUNT:
+                    msg = "INVALID_PARAMETER_AMOUNT : a property is receiving the wrong number of parameters.";
+                    break;
+                case ILLEGAL_CHECK:
+                    msg = "ILLEGAL_CHECK : there is an out-of-bound check.";
+                    break;
+                case INVALID_GRID:
+                    msg = "INVALID_GRID : the grid number is invalid.";
+                    break;
+                case INVALID_PROPERTY:
+                    msg = "INVALID_PROPERTY : a specified property does not exist.";
+                    break;
+                case UNSPECIFIED_ERROR:
+                    msg = "UNSPECIFIED_ERROR : todo roto.";
+                    break;
+                default:
+                    msg = "";
+                    break;
+            }
+            logError(logger, msg);
             compilationStatus = FAILED;
         }
 		logDebugging(logger, "Releasing AST resources...");

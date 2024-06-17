@@ -11,6 +11,16 @@
 #include "../../shared/Type.h"
 #include <limits.h>
 
+enum ErrorCode {
+    UNSPECIFIED_ERROR,
+    INVALID_AUTOMATA_NUMBERS,
+    INVALID_PARAMETER_TYPE,
+    INVALID_PARAMETER_AMOUNT,
+    ILLEGAL_CHECK,
+    INVALID_GRID,
+    INVALID_PROPERTY
+};
+
 /** Initialize module's internal state. */
 void initializeAutomataModule();
 

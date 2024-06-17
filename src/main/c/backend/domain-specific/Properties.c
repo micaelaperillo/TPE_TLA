@@ -27,13 +27,12 @@ int checkParameters(ParameterList * parameterList, char * type, int maxParams);
 int isPropertyValid(char * propertyName, ParameterList * parameterList) {
     int i = 0;
     while (properties[i] != NULL) {
-        if (strcmp(propertyName, properties[i]->name) == 0
-        && checkParameters(parameterList, properties[i]->type, properties[i]->paramAmount)) {
-            return 1;
+        if (strcmp(propertyName, properties[i]->name) == 0) {
+            return checkParameters(parameterList, properties[i]->type, properties[i]->paramAmount);
         }
         i++;
     }
-    return 0;
+    return INVALID_PROP;
 }
 
 int checkParameters(ParameterList * parameterList, char * type, int maxParams) {
@@ -41,13 +40,16 @@ int checkParameters(ParameterList * parameterList, char * type, int maxParams) {
     ParameterList * curr = parameterList;
     while(curr != NULL) {
         if (maxParams != UNDEFINED && i >= maxParams) {
-            return 0;
+            return INVALID_PARAM_AMOUNT;
         }
         if (strcmp(curr->data->dataType, type) != 0) {
-            return 0;
+            return INVALID_PARAM_TYPE;
         }
         curr = curr->next;
         i++;
     }
-    return 1;
+    if (maxParams != UNDEFINED && i != maxParams) {
+        return INVALID_PARAM_AMOUNT;
+    }
+    return OK;
 }

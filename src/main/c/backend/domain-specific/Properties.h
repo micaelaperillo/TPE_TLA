@@ -6,6 +6,13 @@
 #include "../../shared/Type.h"
 #include <limits.h>
 
+enum PropertyReturnCodes {
+    OK,
+    INVALID_PARAM_TYPE,
+    INVALID_PARAM_AMOUNT,
+    INVALID_PROP
+};
+
 int isPropertyValid(char * propertyName, ParameterList * parameterList);
 
 #endif //CAL_9000_PROPERTIES_H
