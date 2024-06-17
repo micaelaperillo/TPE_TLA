@@ -58,16 +58,16 @@ void IgnoredLexemeAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
 Token IntegerLexemeAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
 	_logLexicalAnalyzerContext(__FUNCTION__, lexicalAnalyzerContext);
     char * num;
-    int modifier;
+    int sign;
     if(lexicalAnalyzerContext->lexeme[0] == '-') {
         num = lexicalAnalyzerContext->lexeme + 1;
-        modifier = -1;
+        sign = -1;
     }
     else {
         num = lexicalAnalyzerContext->lexeme;
-        modifier = 1;
+        sign = 1;
     }
-	lexicalAnalyzerContext->semanticValue->integer = atoi(lexicalAnalyzerContext->lexeme) * modifier;
+	lexicalAnalyzerContext->semanticValue->integer = atoi(lexicalAnalyzerContext->lexeme) * sign;
 	return INTEGER;
 }
 

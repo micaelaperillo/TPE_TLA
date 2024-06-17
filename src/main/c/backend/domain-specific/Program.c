@@ -109,7 +109,7 @@ ProgramResult computeRuleNumbers(RuleNumber * ruleNumber) {
 }
 
 ProgramResult computeGrid(Grid * grid) {
-    if (grid->height == 0 || grid->width == 0) {
+    if (grid->height <= 0 || grid->width <= 0) {
         return _invalidComputation(INVALID_GRID);
     } else {
         ProgramResult programResult = {

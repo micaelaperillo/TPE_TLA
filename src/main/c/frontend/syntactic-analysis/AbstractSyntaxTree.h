@@ -76,7 +76,7 @@ struct Automata {
 };
 
 struct Data {
-    const char * dataType;
+    Token type;
     int value;
 };
 

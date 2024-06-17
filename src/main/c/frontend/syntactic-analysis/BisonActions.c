@@ -38,10 +38,10 @@ Constant * IntegerConstantSemanticAction(const int value) {
 	return constant;
 }
 
-Data * DataSemanticAction(char * dataType, int value) {
+Data * DataSemanticAction(Token dataType, int value) {
     _logSyntacticAnalyzerAction(__FUNCTION__);
     Data * data = calloc(1, sizeof(Data));
-    data->dataType = dataType;
+    data->type = dataType;
     data->value = value;
     return data;
 }

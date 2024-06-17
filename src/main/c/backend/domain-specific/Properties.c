@@ -1,9 +1,10 @@
 #include <string.h>
 #include "Properties.h"
+#include "../../frontend/syntactic-analysis/BisonParser.h"
 
 struct Prop {
     char * name;
-    char * type;
+    Token type;
     int paramAmount;
 }Prop;
 
@@ -12,17 +13,17 @@ struct Prop {
 #define UNDEFINED -1
 
 struct Prop * properties[] = {
-        PROP("initial_cells", "int", UNDEFINED),
-        PROP("window_width", "int", 1),
-        PROP("window_height", "int", 1),
-        PROP("wrapping", "bool", 1),
-        PROP("min_time_between_updates", "int", 1),
-        PROP("color", "color", UNDEFINED),
-        PROP("bg_color", "color", 2),
-        0
+        PROP("initial_cells", INTEGER, UNDEFINED),
+        PROP("window_width", INTEGER, 1),
+        PROP("window_height", INTEGER, 1),
+        PROP("wrapping", BOOLEAN, 1),
+        PROP("min_time_between_updates", INTEGER, 1),
+        PROP("color", COLOR_HANDLER, UNDEFINED),
+        PROP("bg_color", COLOR_HANDLER, 2),
+        NULL
 };
 
-int checkParameters(ParameterList * parameterList, char * type, int maxParams);
+int checkParameters(ParameterList * parameterList, Token type, int maxParams);
 
 int isPropertyValid(char * propertyName, ParameterList * parameterList) {
     int i = 0;
@@ -35,14 +36,14 @@ int isPropertyValid(char * propertyName, ParameterList * parameterList) {
     return INVALID_PROP;
 }
 
-int checkParameters(ParameterList * parameterList, char * type, int maxParams) {
+int checkParameters(ParameterList * parameterList, Token type, int maxParams) {
     int i = 0;
     ParameterList * curr = parameterList;
     while(curr != NULL) {
         if (maxParams != UNDEFINED && i >= maxParams) {
             return INVALID_PARAM_AMOUNT;
         }
-        if (strcmp(curr->data->dataType, type) != 0) {
+        if (curr->data->type != type) {
             return INVALID_PARAM_TYPE;
         }
         curr = curr->next;

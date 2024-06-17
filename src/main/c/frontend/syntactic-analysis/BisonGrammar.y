@@ -77,14 +77,6 @@
 %type <property_list> property_list
 %type <property> property
 
-/**
- * Precedence and associativity.
- *
- * @see https://www.gnu.org/software/bison/manual/html_node/Precedence.html
- */
-%left ADD SUB
-%left MUL DIV
-
 %%
 
 program: automata rule												{ $$ = AutomataProgramSemanticAction(currentCompilerState(), $1, $2); }
@@ -108,9 +100,9 @@ check: CHECK OPEN_PARENTHESIS INTEGER COMMA INTEGER CLOSE_PARENTHESIS SEMICOLON	
 automata: AUTOMATA ruleNumber COMMA grid COLON checkList AUTOMATA_NT						{ $$ = AutomataSemanticAction($2, $4, $6); }
 	;
 
-data_type: BOOLEAN												{ $$ = DataSemanticAction("bool", $1); }
-    | COLOR_HANDLER												{ $$ = DataSemanticAction("color", $1); }
-    | INTEGER													{ $$ = DataSemanticAction("int", $1); }
+data_type: BOOLEAN												{ $$ = DataSemanticAction(BOOLEAN, $1); }
+    | COLOR_HANDLER												{ $$ = DataSemanticAction(COLOR_HANDLER, $1); }
+    | INTEGER													{ $$ = DataSemanticAction(INTEGER, $1); }
     ;
 
 parameter_list: data_type											{ $$ = ParameterListSemanticAction($1, NULL); }

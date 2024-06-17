@@ -33,6 +33,6 @@ Rule * RuleSemanticAction(PropertyList * properties);
 PropertyList * PropertyListSemanticAction(Property * property, PropertyList * next);
 Property * PropertySemanticAction(char * propertyName, ParameterList * parameters);
 ParameterList * ParameterListSemanticAction(Data * data, ParameterList * next);
-Data * DataSemanticAction(char * dataType, int value);
+Data * DataSemanticAction(Token dataType, int value);
 
 #endif
