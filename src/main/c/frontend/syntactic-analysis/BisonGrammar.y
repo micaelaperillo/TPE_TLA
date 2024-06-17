@@ -67,9 +67,9 @@
 /** Non-terminals. */
 %type <automata> automata
 %type <program> program
-%type <checkList> checkList
+%type <checkList> check_list
 %type <check> check
-%type <ruleNumber> ruleNumber
+%type <ruleNumber> rule_number
 %type <rule> rule
 %type <grid> grid
 %type <data_type> data_type
@@ -84,20 +84,20 @@ program: automata rule												{ $$ = AutomataProgramSemanticAction(currentCo
 	| automata                                                      { $$ = AutomataProgramSemanticAction(currentCompilerState(), $1, NULL); }
 	;
 
-ruleNumber: OPEN_PARENTHESIS INTEGER COMMA INTEGER COMMA INTEGER CLOSE_PARENTHESIS				{ $$ = RuleNumberSemanticAction($2, $4, $6); }
+rule_number: OPEN_PARENTHESIS INTEGER COMMA INTEGER COMMA INTEGER CLOSE_PARENTHESIS				{ $$ = RuleNumberSemanticAction($2, $4, $6); }
 	;
 
 grid: GRID OPEN_PARENTHESIS INTEGER COMMA INTEGER CLOSE_PARENTHESIS						{ $$ = GridSemanticAction($3, $5); }
 	;
 
-checkList: check												{$$ = CheckListSemanticAction($1, NULL);}
-	| checkList check											{ $$ = CheckListSemanticAction($2, $1); }
+check_list: check												{$$ = CheckListSemanticAction($1, NULL);}
+	| check_list check											{ $$ = CheckListSemanticAction($2, $1); }
 	;
 
 check: CHECK OPEN_PARENTHESIS INTEGER COMMA INTEGER CLOSE_PARENTHESIS SEMICOLON					{ $$ = CheckSemanticAction($3, $5); }
 	;
 
-automata: AUTOMATA ruleNumber COMMA grid COLON checkList AUTOMATA_NT						{ $$ = AutomataSemanticAction($2, $4, $6); }
+automata: AUTOMATA rule_number COMMA grid COLON check_list AUTOMATA_NT						{ $$ = AutomataSemanticAction($2, $4, $6); }
 	;
 
 data_type: BOOLEAN												{ $$ = DataSemanticAction(BOOLEAN, $1); }
