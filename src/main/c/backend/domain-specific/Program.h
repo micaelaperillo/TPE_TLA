@@ -26,13 +26,4 @@ typedef ProgramResult (*BinaryOperator)(const int, const int);
 
 ProgramResult computeProgram(Program * program);
 
-<<<<<<< HEAD:src/main/c/backend/domain-specific/Program.h
-=======
-AutomataResult computeRuleNumbers(RuleNumber * ruleNumber);
-
-AutomataResult computeGrid(Grid * grid);
-
-AutomataResult computeCheckList(CheckList * checkList,Grid* grid);
->>>>>>> 4e78f2d3cec2b2e4d77f5c27625630d331426101:src/main/c/backend/domain-specific/Automata.h
-
 #endif //AUTOMATA_HEADER

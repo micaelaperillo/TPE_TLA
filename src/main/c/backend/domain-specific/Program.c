@@ -70,30 +70,35 @@ ProgramResult computeRule(Rule * rule) {
 }
 
 ProgramResult computeAutomata(Automata * automata) {
-    if (!computeRuleNumbers(automata->ruleNumber).succeed
-    || !computeGrid(automata->grid).succeed
-    || !computeCheckList(automata->checks,automata->grid).succeed){
-        return _invalidComputation();
-    } else {
-        ProgramResult programResult = {
-                .succeed = true,
-                .value = 0
-        };
-        return programResult;
+    ProgramResult result;
+    if (!(result = computeRuleNumbers(automata->ruleNumber)).succeed) {
+        return result;
     }
+    if (!(result = computeGrid(automata->grid)).succeed) {
+        return result;
+    }
+    if (!(result = computeCheckList(automata->checks, automata->grid)).succeed) {
+        return result;
+    }
+    ProgramResult programResult = {
+            .succeed = true,
+            .value = 0
+    };
+    return programResult;
 }
 
 ProgramResult computeRuleNumbers(RuleNumber * ruleNumber) {
-    if (ruleNumber->neighboursAliveToBeBorn > ruleNumber->neighboursAliveToDie
-    || ruleNumber->neighboursAliveToSurvive > ruleNumber->neighboursAliveToDie) {
+    if (ruleNumber->neighboursAliveToBeBorn > ruleNumber->neighboursAliveToDie) {
         return _invalidComputation();
-    } else {
-        ProgramResult programResult = {
-                .succeed = true,
-                .value = 0
-        };
-        return programResult;
     }
+    if (ruleNumber->neighboursAliveToSurvive > ruleNumber->neighboursAliveToDie) {
+        return _invalidComputation();
+    }
+    ProgramResult programResult = {
+            .succeed = true,
+            .value = 0
+    };
+    return programResult;
 }
 
 ProgramResult computeGrid(Grid * grid) {

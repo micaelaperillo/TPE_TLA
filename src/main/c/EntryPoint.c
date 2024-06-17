@@ -1,6 +1,5 @@
 #include "backend/code-generation/Generator.h"
 #include "backend/domain-specific/Program.h"
-#include "backend/domain-specific/Rule.h"
 #include "frontend/lexical-analysis/FlexActions.h"
 #include "frontend/syntactic-analysis/AbstractSyntaxTree.h"
 #include "frontend/syntactic-analysis/BisonActions.h"
@@ -20,7 +19,6 @@ const int main(const int count, const char ** arguments) {
 	initializeSyntacticAnalyzerModule();
 	initializeAbstractSyntaxTreeModule();
 	initializeAutomataModule();
-    initializeRuleModule();
 	initializeGeneratorModule();
 
 	// Logs the arguments of the application.
@@ -39,11 +37,10 @@ const int main(const int count, const char ** arguments) {
 	if (syntacticAnalysisStatus == ACCEPT) {
 		logDebugging(logger, "Computing expression value...");
 		Program * program = compilerState.abstractSyntaxtTree;
-        ProgramResult automataResult = computeAutomata(program->automata); //TODO se podria mergear automata y rule en un mismo check
-        RuleResult ruleResult = computeRule(program->rule);
-        if (automataResult.succeed && ruleResult.succeed) {
+        ProgramResult programResult = computeProgram(program);
+        if (programResult.succeed) {
             compilerState.value = 0; //TODO hacerlo dinamico a partir de los valores de rule y automata
-            generate(&compilerState);
+            //generate(&compilerState);
         }
         else {
             logError(logger, "Todo roto"); //TODO hacer que el error dependa de lo que devolvio automata o rule
@@ -60,7 +57,6 @@ const int main(const int count, const char ** arguments) {
 	logDebugging(logger, "Releasing modules resources...");
 	shutdownGeneratorModule();
 	shutdownAutomataModule();
-    shutdownRuleModule();
 	shutdownAbstractSyntaxTreeModule();
 	shutdownSyntacticAnalyzerModule();
 	shutdownBisonActionsModule();
