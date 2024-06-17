@@ -1,6 +1,5 @@
-
-#ifndef RULE_HEADER
-#define RULE_HEADER
+#ifndef AUTOMATA_HEADER
+#define AUTOMATA_HEADER
 
 /**
  * We reuse the types from the AST for convenience, but you should separate
@@ -13,20 +12,19 @@
 #include <limits.h>
 
 /** Initialize module's internal state. */
-void initializeRuleModule();
+void initializeAutomataModule();
 
 /** Shutdown module's internal state. */
-void shutdownRuleModule();
+void shutdownAutomataModule();
 
 typedef struct {
     boolean succeed;
     int value;
-} RuleResult;
+} ProgramResult;
 
-typedef RuleResult (*BinaryOperator)(const int, const int);
+typedef ProgramResult (*BinaryOperator)(const int, const int);
 
-RuleResult computeRule(Rule * rule);
+ProgramResult computeProgram(Program * program);
 
-RuleResult computeProperty(Property * property);
 
-#endif //RULE_HEADER
+#endif //AUTOMATA_HEADER

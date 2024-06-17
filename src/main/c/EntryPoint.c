@@ -1,5 +1,5 @@
 #include "backend/code-generation/Generator.h"
-#include "backend/domain-specific/Automata.h"
+#include "backend/domain-specific/Program.h"
 #include "backend/domain-specific/Rule.h"
 #include "frontend/lexical-analysis/FlexActions.h"
 #include "frontend/syntactic-analysis/AbstractSyntaxTree.h"
@@ -39,7 +39,7 @@ const int main(const int count, const char ** arguments) {
 	if (syntacticAnalysisStatus == ACCEPT) {
 		logDebugging(logger, "Computing expression value...");
 		Program * program = compilerState.abstractSyntaxtTree;
-        AutomataResult automataResult = computeAutomata(program->automata); //TODO se podria mergear automata y rule en un mismo check
+        ProgramResult automataResult = computeAutomata(program->automata); //TODO se podria mergear automata y rule en un mismo check
         RuleResult ruleResult = computeRule(program->rule);
         if (automataResult.succeed && ruleResult.succeed) {
             compilerState.value = 0; //TODO hacerlo dinamico a partir de los valores de rule y automata
