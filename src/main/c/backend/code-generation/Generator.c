@@ -54,9 +54,9 @@ static void _generateGrid(Grid* grid){
 }
 
 
-static void _generateStyleParams(Automata* automata){
+static void _generateStyleParams(Program* program){
 	_output(pyFileOutput,1,"%s","\"style_params\": {\n");
-	_generateGrid(automata->grid);
+	_generateGrid(program->automata->grid);
 	_output(pyFileOutput,1,"%s","}\n");
 }
 
@@ -87,17 +87,20 @@ static void _generateAutomataParams(Automata* automata){
 		_output(pyFileOutput,1,"%s","},\n");
 }
 
-static void _generateAutomata(Automata* automata){
-	_output(pyFileOutput,0,"%s","params= {\n");
-	_generateAutomataParams(automata);
-	_generateStyleParams(automata);
-	_output(pyFileOutput,0,"%s","}\n");
-}
 
 static void _generateProgram(Program * program) {
-	_generateAutomata(program->automata);
-	//_generateRules(program->rule);
+	_output(pyFileOutput,0,"%s","params= {\n");
+	_generateAutomataParams(program->automata);
+	_generateStyleParams(program);
+	_output(pyFileOutput,0,"%s","}\n");
 	_generateMainProgram();
+}
+
+static void _generateRules(Rule* rule){
+
+}
+static void _generatePropertyList(PropertyList* propertyList){
+
 }
 
 /**
