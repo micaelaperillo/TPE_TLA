@@ -1,3 +1,34 @@
+import pygame
+import numpy as np
+import time
+import tk as tk
+modified_params= {
+	"automata_params" : {
+		"alive":3,
+		"dead":8,
+		"born":2,
+		"rules": {
+			(-1, 1)
+			,(-1, 0)
+			,(-1, -1)
+			,(1, -1)
+			,(1, 1)
+			,(1, 0)
+			,(0, 1)
+			,(0, -1)
+		}
+	},
+	"style_params": {
+		"grid_x":100,
+		"grid_y":100,
+		"min_time_between_updates" : 10 , 
+		"window_height" : 600 , 
+		"window_width" : 800 , 
+		"wrapping" : False , 
+		"bg_color" : "#000000" , 
+		"color" : [ "#00FF00" , "#FFDDEE" , "#D12001" , "#FFFFFF" ] , 
+	}
+}
 default_params = { "style_params" : {
     "initial_cells" : [],
     "window_width" : 800,
@@ -163,3 +194,5 @@ def main():
         gameState = np.copy(newGameState)
 
         pygame.display.flip()
+if __name__ == "__main__":
+	main()

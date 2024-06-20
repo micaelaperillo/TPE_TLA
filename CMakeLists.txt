@@ -54,7 +54,6 @@ endif ()
 # The header files (*.h extension), are automatically included from the source-codes.
 add_executable(Compiler
 	src/main/c/backend/code-generation/Generator.c
-	src/main/c/backend/domain-specific/Calculator.c
 	src/main/c/backend/domain-specific/Program.c
 	src/main/c/backend/domain-specific/Properties.c
 	src/main/c/backend/type-checking/PropertyTypeCheck.c

@@ -5,7 +5,7 @@
 
 #define INDENTATION_CHARACTER '\t'
 #define INDENTATION_SIZE 1
-#define PY_FILE_NAME "game_Of_Life.py"
+#define PY_FILE_NAME "out/automata.py"
 #define CAL9K_PATHFILE "/utils/cal9k.py"
 static Logger * _logger = NULL;
 
@@ -228,13 +228,13 @@ void generate(CompilerState * compilerState) {
 	pyFileMain=fopen(cal9kAbsolutePath,"r");
 
 	if(pyFileMain==NULL){
-		logError(_logger,"Roto abrir el archivo cal9k.py");
+		logError(_logger,"cal9k.py file machine broke");
 		return;
 	}
 
 	pyFileOutput=fopen(PY_FILE_NAME,"w");
 	if(pyFileOutput==NULL){
-		logError(_logger,"Roto crear el archivo .py");
+		logError(_logger,"output creation machine broke");
 		return;
 	}
 
