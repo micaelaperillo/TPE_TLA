@@ -1,17 +1,55 @@
-# CAL 9000
-## Cellular Automata Language 9000
+[![✗](https://img.shields.io/badge/Release-v1.0.0-ffb600.svg?style=for-the-badge)](https://github.com/micaelaperillo/CAL_9000/releases)
 
-El proyecto buscará abstraer lo máximo posible la generación visual de los autómatas celulares. Para ello se proporcionará al usuario un lenguaje con formato similar a Python.
+# CAL 9000 Compiler
 
-Se brindarán dos modalidades distintas de uso del lenguaje. La primera consistirá en especificar una regla predefinida de vecindad, o bien una especificada por el usuario. utilizando una nomenclatura provista por el lenguaje. Por otro lado, la segunda le permitirá al usuario dibujar los autómatas celulares elementales.
+A compiler based on the cal9k language detailed below.
 
-El lenguaje generará una salida en Python, utilizando la librería PyGame para poder visualizar el autómata y que el usuario interactúe con el mismo en caso de que sea en dos dimensiones.
+* [Environment](#environment)
+* Installation
+  * [Docker](doc/readme/Docker.md)
+  * [Microsoft Windows](doc/readme/Windows.md)
+  * [Ubuntu](doc/readme/Ubuntu.md)
 
-La nomenclatura para los autómatas en dos dimensiones será la siguiente: A/D/B/V, en donde cada letra significa
+## Environment
 
-    A: Cantidad de vecinos vivos para que la célula siga viva, sino muere de soledad
-    D: Cantidad de vecinos vivos para que la célula muera por sobrepoblación
-    B: Cantidad de vecinos vivos para que una célula nazca en una celda vacía
-    V: Regla de vecindad, podra ser Moore (M), Von Neumann (VN) o creada por el usuario (U) y el rango especificado. Por ejemplo. M(2) es la distancia de Moore con rango dos. 
-    
-La extensión de los archivos será .CAL9K.
+Set the following environment variables to control and configure the behaviour of the application:
+
+|Name|Default|Description|
+|-|:-:|-|
+|`LOG_IGNORED_LEXEMES`|`true`|When `true`, logs all of the ignored lexemes found with Flex at DEBUGGING level. To remove those logs from the console output set it to `false`.|
+|`LOGGING_LEVEL`|`INFORMATION`|The minimum level to log in the console output. From lower to higher, the available levels are: `ALL`, `DEBUGGING`, `INFORMATION`, `WARNING`, `ERROR` and `CRITICAL`.|
+
+
+# Cellular Automata Language 9000
+
+This project aims to simplify the visual creation of cellular automatas by specifying the following values:
+```
+automata (A,D,B), grid (X,Y):
+     check(M,N);
+automatan't
+
+rule:
+     prop:property_name = (param1, param2)
+rulen't
+```
+
+Where:
+```
+A: Minimum amount of neighbours needed for a cell to stay alive.
+D: Minimum amount of neighbours needed for a cell to die of overpopulation.
+B: Exact amount of neighbours needed for a cell to be born.
+
+X, Y: Grid size.
+M, N: Which cells should be considered neighbours. A value of (1, 1) will check the lower-right adjacent cell, a value of (-1, 1) will check the lower-left neighbour.
+```
+
+A list of properties can be found at [Properties](doc/properties.md).
+
+The output file can be found at out/automata.py. The following dependencies are required to run the program:
+
+```
+pip install pygame
+pip install numpy
+pip install tk
+```
+
