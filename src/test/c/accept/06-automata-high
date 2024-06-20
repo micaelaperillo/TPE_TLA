@@ -17,5 +17,4 @@ rule:
      prop:window_width = (1280);
      prop:window_height = (768);
      prop:min_time_between_updates = (1);
-     prop:initial_cells = (12, 245, 678, 209);
 rulen't

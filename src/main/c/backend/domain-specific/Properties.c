@@ -14,7 +14,6 @@ struct Prop {
 #define UNDEFINED -1
 
 struct Prop * properties[] = {
-        PROP("initial_cells", INTEGER, UNDEFINED),
         PROP("window_width", INTEGER, 1),
         PROP("window_height", INTEGER, 1),
         PROP("wrapping", BOOLEAN, 1),

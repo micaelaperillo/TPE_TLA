@@ -4,26 +4,17 @@ import time
 import tk as tk
 modified_params= {
 	"automata_params" : {
-		"alive":3,
-		"dead":6,
+		"alive":1,
+		"dead":2,
 		"born":1,
 		"rules": {
-			(1, -1)
-			,(1, 1)
-			,(1, 0)
-			,(0, 1)
-			,(0, -1)
+			(1, 1)
 		}
 	},
 	"style_params": {
 		"grid_x":100,
-		"grid_y":100,
-		"min_time_between_updates" : 300 , 
-		"window_height" : 600 , 
-		"window_width" : 800 , 
-		"wrapping" : True , 
-		"bg_color" : "#000000" , 
-		"color" : [ "#FFFFFF" ] , 
+		"grid_y":10,
+		"window_width" : 1280 , 
 	}
 }
 default_params = { "style_params" : {
@@ -171,8 +162,8 @@ def main():
                         # amount of alive neighbours
                         n_neigh = calculate_neighbours(gameState, x, y, params["automata_params"]["rules"], params["style_params"]["grid_x"], params["style_params"]["grid_y"], params["style_params"]["wrapping"])
 
-                        # born rule: must be dead and have x alive neighbours or more to be born
-                        if (n_neigh >= params["automata_params"]["born"] and gameState[x, y] == 0):
+                        # born rule: must be dead and have x alive neighbours to be born
+                        if (n_neigh == params["automata_params"]["born"] and gameState[x, y] == 0):
                             newGameState[x, y] = 1
 
                         # dead rule: must be alive and have x alive neighbours or more to die
