@@ -31,13 +31,6 @@ static void _logSyntacticAnalyzerAction(const char * functionName) {
 
 /* PUBLIC FUNCTIONS */
 
-Constant * IntegerConstantSemanticAction(const int value) {
-	_logSyntacticAnalyzerAction(__FUNCTION__);
-	Constant * constant = calloc(1, sizeof(Constant));
-	constant->value = value;
-	return constant;
-}
-
 Data * DataSemanticAction(Token dataType, int value) {
     _logSyntacticAnalyzerAction(__FUNCTION__);
     Data * data = calloc(1, sizeof(Data));
