@@ -5,8 +5,8 @@ import tk as tk
 modified_params= {
 	"automata_params" : {
 		"alive":3,
-		"dead":8,
-		"born":2,
+		"dead":4,
+		"born":3,
 		"rules": {
 			(-1, 1)
 			,(-1, 0)
@@ -21,7 +21,7 @@ modified_params= {
 	"style_params": {
 		"grid_x":100,
 		"grid_y":100,
-		"min_time_between_updates" : 10 , 
+		"min_time_between_updates" : 1000 , 
 		"window_height" : 600 , 
 		"window_width" : 800 , 
 		"wrapping" : False , 
@@ -34,7 +34,7 @@ default_params = { "style_params" : {
     "window_width" : 800,
     "window_height" : 600,
     "wrapping" : "True",
-    "min_time_between_updates" : 1,
+    "min_time_between_updates" : 500,
     "bg_color" : "#000000" ,
     "color" : [ "#FFFFFF" ] ,
     }
@@ -113,6 +113,12 @@ def main():
     pauseExec = True
     running = True
 
+    right_mouse_pressed = False
+    left_mouse_pressed = False
+
+    clock = pygame.time.Clock()
+    ms = 0
+
     generation = 0
     title = f"CAL 9000 - Generation number: {generation}"
 
@@ -120,10 +126,8 @@ def main():
 
     while running:
 
-        newGameState = np.copy(gameState)
-
-        screen.fill(bg)
         time.sleep(0.1)
+        newGameState = np.copy(gameState)
 
         ev = pygame.event.get()
 
@@ -143,52 +147,66 @@ def main():
                     generation = 0
                 if event.key == pygame.K_h:
                     help()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    left_mouse_pressed = False
+                elif event.button == 3:
+                    right_mouse_pressed = True
+            if event.type == pygame.MOUSEBUTTONUP:
+                if event.button == 1:
+                    left_mouse_pressed = True
+                elif event.button == 3:
+                    right_mouse_pressed = False
 
-            mouseClick = pygame.mouse.get_pressed()
+        if right_mouse_pressed or left_mouse_pressed:
+            left_mouse_pressed = False
+            posX, posY = pygame.mouse.get_pos()
+            celX, celY = int(np.floor(posX / dimCW)), int(np.floor(posY / dimCH))
+            newGameState[celX, celY] = not gameState[celX, celY]
 
-            if sum(mouseClick) > 0:
-                posX, posY = pygame.mouse.get_pos()
-                celX, celY = int(np.floor(posX / dimCW)), int(np.floor(posY / dimCH))
-                newGameState[celX, celY] = not gameState[celX, celY]
+        ms += clock.tick(0)
+        if ms > params["style_params"]["min_time_between_updates"]:
+            ms = 0
+            for y in range(0, nyC):
+                for x in range(0, nxC):
 
+                    if not pauseExec:
+                        # amount of alive neighbours
+                        n_neigh = calculate_neighbours(gameState, x, y, params["automata_params"]["rules"], params["style_params"]["grid_x"], params["style_params"]["grid_y"], params["style_params"]["wrapping"])
+
+                        # born rule: must be dead and have x alive neighbours or more to be born
+                        if (n_neigh >= params["automata_params"]["born"] and gameState[x, y] == 0):
+                            newGameState[x, y] = 1
+
+                        # dead rule: must be alive and have x alive neighbours or more to die
+                        elif (n_neigh >= params["automata_params"]["dead"] and gameState[x, y] == 1):
+                            newGameState[x, y] = 0
+
+                        # alive rule: must be alive and have at least x alive neighbours to stay alive
+                        elif (n_neigh >= params["automata_params"]["alive"] and gameState[x, y] == 1):
+                            newGameState[x, y] = 1
+
+                        # there's not enough neighbors to stay alive, so it dies
+                        else:
+                            newGameState[x, y] = 0;
+            if pauseExec:
+                title = "CAL 9000 - PAUSED"
+            else:
+                generation += 1
+                title = f"CAL 9000 - Generation number: {generation}"
+        screen.fill(bg)
         for y in range(0, nyC):
             for x in range(0, nxC):
-
-                if not pauseExec:
-                    # amount of alive neighbours
-                    n_neigh = calculate_neighbours(gameState, x, y, params["automata_params"]["rules"], params["style_params"]["grid_x"], params["style_params"]["grid_y"], params["style_params"]["wrapping"])
-
-                    # born rule: must be dead and have x alive neighbours or more to be born
-                    if (n_neigh >= params["automata_params"]["born"] and gameState[x, y] == 0):
-                        newGameState[x, y] = 1
-
-                    # dead rule: must be alive and have x alive neighbours or more to die
-                    elif (n_neigh >= params["automata_params"]["dead"] and gameState[x, y] == 1):
-                        newGameState[x, y] = 0
-
-                    # alive rule: must be alive and have at least x alive neighbours to stay alive
-                    elif (n_neigh >= params["automata_params"]["alive"] and gameState[x, y] == 1):
-                        newGameState[x, y] = 1
-
-                    # there's not enough neighbors to stay alive, so it dies
-                    else:
-                        newGameState[x, y] = 0;
-
                 pol = [ ((x)   * dimCW, (y)   * dimCH),
                         ((x+1) * dimCW, (y)   * dimCH),
                         ((x+1) * dimCW, (y+1) * dimCH),
                         ((x)   * dimCW, (y+1) * dimCH)]
 
                 if newGameState[x, y] == 0:
-                    pygame.draw.polygon(screen, (128, 128, 128), pol, width=1)
+                    pygame.draw.polygon(screen, (20, 20, 20), pol, width=1)
                 else:
                     color_index = generation % len(params["style_params"]["color"])
                     pygame.draw.polygon(screen, params["style_params"]["color"][color_index], pol, width=0)
-        if pauseExec:
-            title = "CAL 9000 - PAUSED"
-        else:
-            generation += 1
-            title = f"CAL 9000 - Generation number: {generation}"
 
         pygame.display.set_caption(title)
         gameState = np.copy(newGameState)
