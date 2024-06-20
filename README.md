@@ -56,3 +56,12 @@ Once installed, simply run:
 ```
 python3 out/automata.py
 ```
+
+#Controls:
+Once the simulation is running:
+
+- Left clicking a cell will toggle its state.
+- Holding right click and moving your mouse across the grid will let you paint over the cells.
+- Space will toggle pause.
+  
+The cells can only be interacted with while paused.
