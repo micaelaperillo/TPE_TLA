@@ -8,6 +8,8 @@ A compiler based on the cal9k language detailed below.
   * [Docker](docs/readme/Docker.md)
   * [Ubuntu](docs/readme/Ubuntu.md)
 
+The compiler is not compatible with Windows, however programs like WSL can compile and execute it.
+
 ## Environment
 
 Set the following environment variables to control and configure the behaviour of the application:
