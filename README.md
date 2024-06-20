@@ -6,9 +6,8 @@ A compiler based on the cal9k language detailed below.
 
 * [Environment](#environment)
 * Installation
-  * [Docker](doc/readme/Docker.md)
-  * [Microsoft Windows](doc/readme/Windows.md)
-  * [Ubuntu](doc/readme/Ubuntu.md)
+  * [Docker](docs/readme/Docker.md)
+  * [Ubuntu](docs/readme/Ubuntu.md)
 
 ## Environment
 
@@ -43,7 +42,7 @@ X, Y: Grid size.
 M, N: Which cells should be considered neighbours. A value of (1, 1) will check the lower-right adjacent cell, a value of (-1, 1) will check the lower-left neighbour.
 ```
 
-A list of properties can be found at [Properties](doc/properties.md).
+A list of properties can be found at [Properties](docs/Properties.md).
 
 The output file can be found at out/automata.py. The following dependencies are required to run the program:
 
