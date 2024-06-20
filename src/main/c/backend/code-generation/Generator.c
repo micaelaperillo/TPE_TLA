@@ -29,35 +29,38 @@ static void _generateAutomata(Automata* automata);
 static void _generateRule(Rule* automata);
 static void _generatePrologue(void);
 static char * _indentation(const unsigned int indentationLevel);
-static void _output(FILE* file,const unsigned int indentationLevel, const char * const format, ...);
+static void _output(const unsigned int indentationLevel, const char * const format, ...);
 static void _generateRuleNumber(RuleNumber* ruleNumber );
 static void _generateGrid(Grid* grid);
 static void _generateCheckList(CheckList* checks);
+static void _generateRules(Rule* rule);
+static void _generatePropertyList(PropertyList* propertyList);
 /**
  * Creates ending footing of the program
  */
 static void _generateEpilogue() {
-	_output(pyFileOutput,0,"%s","if __name__ == \"__main__\":\n");
-	_output(pyFileOutput,1,"%s","main()\n");
+	_output(0,"%s","if __name__ == \"__main__\":\n");
+	_output(1,"%s","main()\n");
 	fclose(pyFileOutput);
 }
 
 static void _generateRuleNumber(RuleNumber* ruleNumber){
-	_output(pyFileOutput,2,"%s:%d,\n","\"alive\"",ruleNumber->neighboursAliveToSurvive);
-	_output(pyFileOutput,2,"%s:%d,\n","\"dead\"",ruleNumber->neighboursAliveToDie);
-	_output(pyFileOutput,2,"%s:%d,\n","\"born\"",ruleNumber->neighboursAliveToBeBorn);
+	_output(2,"%s:%d,\n","\"alive\"",ruleNumber->neighboursAliveToSurvive);
+	_output(2,"%s:%d,\n","\"dead\"",ruleNumber->neighboursAliveToDie);
+	_output(2,"%s:%d,\n","\"born\"",ruleNumber->neighboursAliveToBeBorn);
 }
 
 static void _generateGrid(Grid* grid){
-	_output(pyFileOutput,2,"%s:%d,\n","\"grid_x\"",grid->width);
-	_output(pyFileOutput,2,"%s:%d,\n","\"grid_y\"",grid->height);
+	_output(2,"%s:%d,\n","\"grid_x\"",grid->width);
+	_output(2,"%s:%d,\n","\"grid_y\"",grid->height);
 }
 
 
 static void _generateStyleParams(Program* program){
-	_output(pyFileOutput,1,"%s","\"style_params\": {\n");
+	_output(1,"%s","\"style_params\": {\n");
 	_generateGrid(program->automata->grid);
-	_output(pyFileOutput,1,"%s","}\n");
+	_generateRules(program->rule);
+	_output(1,"%s","}\n");
 }
 
 static void _generateMainProgram(){
@@ -70,34 +73,38 @@ static void _generateMainProgram(){
 
 static void _generateCheckList(CheckList* checks){
 	CheckList* currentCheck=checks;
-	_output(pyFileOutput,2,"%s","\"rules\": {\n");
-	_output(pyFileOutput,3,"(%d, %d)\n",currentCheck->check->x,currentCheck->check->y);//first rule before all rules
+	_output(2,"%s","\"rules\": {\n");
+	_output(3,"(%d, %d)\n",currentCheck->check->x,currentCheck->check->y);//first rule before all rules
 	currentCheck=currentCheck->next;
 	while(currentCheck){
-		_output(pyFileOutput,3,",(%d, %d)\n",currentCheck->check->x,currentCheck->check->y);
+		_output(3,",(%d, %d)\n",currentCheck->check->x,currentCheck->check->y);
 		currentCheck=currentCheck->next;
 	}
-	_output(pyFileOutput,2,"%s","}\n");
+	_output(2,"%s","}\n");
 }
 
 static void _generateAutomataParams(Automata* automata){
-	_output(pyFileOutput,1,"%s","\"automata_params\" : {\n");
+	_output(1,"%s","\"automata_params\" : {\n");
 	_generateRuleNumber(automata->ruleNumber);
 	_generateCheckList(automata->checks);
-		_output(pyFileOutput,1,"%s","},\n");
+		_output(1,"%s","},\n");
 }
 
 
 static void _generateProgram(Program * program) {
-	_output(pyFileOutput,0,"%s","params= {\n");
+	_output(0,"%s","params= {\n");
 	_generateAutomataParams(program->automata);
 	_generateStyleParams(program);
-	_output(pyFileOutput,0,"%s","}\n");
+	_output(0,"%s","}\n");
 	_generateMainProgram();
 }
 
 static void _generateRules(Rule* rule){
-
+	PropertyList* propertyList=rule->properties;
+	while(propertyList){
+		_generatePropertyList(propertyList);
+		propertyList=propertyList->next;
+	}
 }
 static void _generatePropertyList(PropertyList* propertyList){
 
@@ -107,7 +114,7 @@ static void _generatePropertyList(PropertyList* propertyList){
  * Creates the necessary imports for the program ( ͡° ͜ʖ ͡°)
  */
 static void _generatePrologue(void) {
-	_output(pyFileOutput,0, "%s","import pygame\nimport numpy as np\nimport time\nimport tk as tk\n");
+	_output(0, "%s","import pygame\nimport numpy as np\nimport time\nimport tk as tk\n");
 }
 
 /**
@@ -120,12 +127,12 @@ static char * _indentation(const unsigned int level) {
 /**
  * Outputs a formatted string to standard output.
  */
-static void _output(FILE* file,const unsigned int indentationLevel, const char * const format, ...) {
+static void _output(const unsigned int indentationLevel, const char * const format, ...) {
 	va_list arguments;
 	va_start(arguments, format);
 	char * indentation = _indentation(indentationLevel);
 	char * effectiveFormat = concatenate(2, indentation, format);
-	vfprintf(file, effectiveFormat, arguments);
+	vfprintf(pyFileOutput, effectiveFormat, arguments);
 	free(effectiveFormat);
 	free(indentation);
 	va_end(arguments);
