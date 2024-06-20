@@ -51,4 +51,8 @@ pip install pygame
 pip install numpy
 pip install tk
 ```
+Once installed, simply run:
 
+```
+python3 out/automata.py
+```
