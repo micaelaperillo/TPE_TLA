@@ -67,7 +67,7 @@ Token IntegerLexemeAction(LexicalAnalyzerContext * lexicalAnalyzerContext) {
         num = lexicalAnalyzerContext->lexeme;
         sign = 1;
     }
-	lexicalAnalyzerContext->semanticValue->integer = atoi(lexicalAnalyzerContext->lexeme) * sign;
+	lexicalAnalyzerContext->semanticValue->integer = ((int)(atoi(num))) * sign;
 	return INTEGER;
 }
 

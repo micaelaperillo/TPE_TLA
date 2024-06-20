@@ -1,15 +1,23 @@
-default_params = {"style_params" :{
-                                    "initial_cells" : [],
-                                    "window_width" : 800,
-                                    "window_height" : 600,
-                                    "wrapping" : "True",
-                                    "min_time_between_updates" : 1,
-                                    "color" : ["#FFFFFF"],
-                                    "bg_color" : "#000000",
-                                    }
-                }
+default_params = { "style_params" : {
+    "initial_cells" : [],
+    "window_width" : 800,
+    "window_height" : 600,
+    "wrapping" : "True",
+    "min_time_between_updates" : 1,
+    "bg_color" : "#000000" ,
+    "color" : [ "#FFFFFF" ] ,
+    }
+}
 
-params = {}
+def deep_update(source, overrides):
+    for key, value in overrides.items():
+        if isinstance(value, dict) and key in source and isinstance(source[key], dict):
+            deep_update(source[key], value)
+        else:
+            source[key] = value
+
+params = default_params.copy()
+deep_update(params, modified_params)
 
 
 def help():
@@ -53,14 +61,7 @@ def calculate_neighbours(state, x, y, rules, dim_x, dim_y, wrapping):
 
     return neighbours
 
-
-def import_params():
-    params = default_params.copy()
-    params.update(modified_params)
-
 def main():
-
-    import_params()
 
     pygame.init()
 
@@ -119,24 +120,28 @@ def main():
                 celX, celY = int(np.floor(posX / dimCW)), int(np.floor(posY / dimCH))
                 newGameState[celX, celY] = not gameState[celX, celY]
 
-        for y in range(0, nxC):
-            for x in range(0, nyC):
+        for y in range(0, nyC):
+            for x in range(0, nxC):
 
                 if not pauseExec:
                     # amount of alive neighbours
                     n_neigh = calculate_neighbours(gameState, x, y, params["automata_params"]["rules"], params["style_params"]["grid_x"], params["style_params"]["grid_y"], params["style_params"]["wrapping"])
 
-                    # alive rule: must be alive and have x alive neighbours to stay alive
-                    if (n_neigh == params["automata_params"]["alive"] and gameState[x, y] == 1):
+                    # born rule: must be dead and have x alive neighbours or more to be born
+                    if (n_neigh >= params["automata_params"]["born"] and gameState[x, y] == 0):
                         newGameState[x, y] = 1
 
-                    # dead rule: must be alive and have x alive neighbours to die
-                    elif (n_neigh == params["automata_params"]["dead"] and gameState[x, y] == 1):
+                    # dead rule: must be alive and have x alive neighbours or more to die
+                    elif (n_neigh >= params["automata_params"]["dead"] and gameState[x, y] == 1):
                         newGameState[x, y] = 0
 
-                    # born rule: must be dead and have x alive neighbours to be born
-                    elif (n_neigh == params["automata_params"]["born"] and gameState[x, y] == 0):
+                    # alive rule: must be alive and have at least x alive neighbours to stay alive
+                    elif (n_neigh >= params["automata_params"]["alive"] and gameState[x, y] == 1):
                         newGameState[x, y] = 1
+
+                    # there's not enough neighbors to stay alive, so it dies
+                    else:
+                        newGameState[x, y] = 0;
 
                 pol = [ ((x)   * dimCW, (y)   * dimCH),
                         ((x+1) * dimCW, (y)   * dimCH),

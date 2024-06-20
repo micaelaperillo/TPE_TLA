@@ -83,6 +83,7 @@ struct Data {
 struct ParameterList {
     Data * data;
     ParameterList * next;
+    int multipleParameters; //only set in backend
 };
 
 struct Property {

@@ -1,0 +1,19 @@
+automata (2,4,3), grid (10, 100):
+     check(0, -1);
+     check(0, 1);
+     check(1, 0);
+     check(1, 1);
+     check(1, -1);
+     check(-1, -1);
+     check(-1, 0);
+     check(-1, 1);
+automatan't
+
+rule:
+     prop:color = (#FFFFFF, #D12001, #FFDDEE, #00FF00);
+     prop:bg_color = (#000000);
+     prop:wrapping = (true);
+     prop:window_width = (400);
+     prop:window_height = (300);
+     prop:min_time_between_updates = (2);
+rulen't

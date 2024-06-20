@@ -53,5 +53,6 @@ int checkParameters(ParameterList * parameterList, Token type, int maxParams) {
     if (maxParams != UNDEFINED && i != maxParams) {
         return INVALID_PARAM_AMOUNT;
     }
+    parameterList->multipleParameters = maxParams != 1 ? 1 : 0;
     return OK;
 }

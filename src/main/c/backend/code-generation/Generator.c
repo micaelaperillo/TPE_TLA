@@ -1,4 +1,5 @@
 #include "Generator.h"
+#include "../../frontend/syntactic-analysis/BisonParser.h"
 
 /* MODULE INTERNAL STATE */
 
@@ -58,7 +59,9 @@ static void _generateGrid(Grid* grid){
 static void _generateStyleParams(Program* program){
 	_output(1,"%s","\"style_params\": {\n");
 	_generateGrid(program->automata->grid);
-	_generateRules(program->rule);
+    if (program->rule != NULL) {
+        _generateRules(program->rule);
+    }
 	_output(1,"%s","}\n");
 }
 
@@ -106,7 +109,7 @@ static void _generateRules(Rule* rule){
 	}
 }
 
-
+/*
 static void _generatePropertyList(PropertyList* propertyList){
 	Property* prop=propertyList->property;
 	if(strcmp(prop->propertyName,"bg_color")){
@@ -125,6 +128,67 @@ static void _generatePropertyList(PropertyList* propertyList){
 	else if(strcmp(propertyList->property->propertyName,"wrapping")){
 		_output(2,"wrapping: %s ,\n",propertyList->property->parameters->data==true ? "True":"False");
 	}
+}*/
+
+static char * append(char * ptr, char * str) {
+    strcat(ptr, str);
+    ptr += strlen(str);
+    return ptr;
+}
+
+static void _generatePropertyList(PropertyList * propertyList) {
+    Property * prop = propertyList->property;
+    char * propName = prop->propertyName;
+    ParameterList * parameterList = prop->parameters;
+
+    char finalOutput[1000] = {'\0'}; //TODO HACERLO DINAMICO PARA QUE NO EXPOTE
+    char * foptr = finalOutput;
+    char initStr[37];
+
+    sprintf(initStr, "\"%s\" : ", propName);
+    foptr = append(foptr, initStr);
+
+    boolean multiple = parameterList->multipleParameters ? true : false;
+    if (multiple) {
+        char * aux = "[ ";
+        foptr = append(foptr, aux);
+    }
+    char parameterOutput[256] = {'\0'};
+    while(parameterList) {
+        switch (parameterList->data->type) {
+            case INTEGER:
+                sprintf(parameterOutput, "%d", parameterList->data->value);
+                break;
+            case COLOR_HANDLER:
+                sprintf(parameterOutput, "\"#%06X\"", parameterList->data->value);
+                break;
+            case BOOLEAN:
+                sprintf(parameterOutput, "%s", parameterList->data->value ? "True":"False");
+                break;
+            default:
+                break;
+        }
+
+        foptr = append(foptr, parameterOutput);
+
+        if (parameterList->next != NULL) {
+            char * aux = " , ";
+            foptr = append(foptr, aux);
+        }
+
+        parameterList = parameterList->next;
+    }
+
+    if (multiple) {
+        char * aux = " ]";
+        foptr = append(foptr, aux);
+    }
+
+
+    char * aux = " , \n";
+    foptr = append(foptr, aux);
+
+    _output(2, finalOutput);
 }
 
 /**
