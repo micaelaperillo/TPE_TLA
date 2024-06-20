@@ -105,7 +105,10 @@ ProgramResult computeAutomata(Automata * automata) {
 
 ProgramResult computeRuleNumbers(RuleNumber * ruleNumber) {
     if (ruleNumber->neighboursAliveToBeBorn > ruleNumber->neighboursAliveToDie
-    || ruleNumber->neighboursAliveToSurvive > ruleNumber->neighboursAliveToDie) {
+    || ruleNumber->neighboursAliveToSurvive > ruleNumber->neighboursAliveToDie
+    || ruleNumber->neighboursAliveToSurvive < 0
+    || ruleNumber->neighboursAliveToDie < 0
+    || ruleNumber->neighboursAliveToBeBorn < 0) {
         return _invalidComputation(INVALID_AUTOMATA_NUMBERS);
     }
     ProgramResult programResult = {
