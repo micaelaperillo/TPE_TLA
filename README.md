@@ -4,7 +4,6 @@
 
 A compiler based on the cal9k language detailed below.
 
-* [Environment](#environment)
 * Installation
   * [Docker](docs/readme/Docker.md)
   * [Ubuntu](docs/readme/Ubuntu.md)
@@ -57,7 +56,7 @@ Once installed, simply run:
 python3 out/automata.py
 ```
 
-#Controls:
+# Controls:
 Once the simulation is running:
 
 - Left clicking a cell will toggle its state.
