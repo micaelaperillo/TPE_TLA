@@ -143,8 +143,8 @@ def main():
                         # amount of alive neighbours
                         n_neigh = calculate_neighbours(gameState, x, y, params["automata_params"]["rules"], params["style_params"]["grid_x"], params["style_params"]["grid_y"], params["style_params"]["wrapping"])
 
-                        # born rule: must be dead and have x alive neighbours or more to be born
-                        if (n_neigh >= params["automata_params"]["born"] and gameState[x, y] == 0):
+                        # born rule: must be dead and have x alive neighbours to be born
+                        if (n_neigh == params["automata_params"]["born"] and gameState[x, y] == 0):
                             newGameState[x, y] = 1
 
                         # dead rule: must be alive and have x alive neighbours or more to die
