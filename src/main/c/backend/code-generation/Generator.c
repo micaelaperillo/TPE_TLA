@@ -109,27 +109,6 @@ static void _generateRules(Rule* rule){
 	}
 }
 
-/*
-static void _generatePropertyList(PropertyList* propertyList){
-	Property* prop=propertyList->property;
-	if(strcmp(prop->propertyName,"bg_color")){
-		_output(2,"\"bg_color\": \"#%06x\", \n",prop->parameters->data->value);
-	}
-	else if (strcmp(prop->propertyName,"color")){
-		ParameterList* param=prop->parameters;
-		_output(2,"\"color\": [\" #%06x \"",param->data->value);
-		param=param->next;
-		while(param){
-			_output(0,", \" %06x \"",param->data->value);
-			param=param->next;
-		}
-		_output(0,"%s","],\n");
-	}
-	else if(strcmp(propertyList->property->propertyName,"wrapping")){
-		_output(2,"wrapping: %s ,\n",propertyList->property->parameters->data==true ? "True":"False");
-	}
-}*/
-
 static char * append(char * ptr, char * str) {
     strcat(ptr, str);
     ptr += strlen(str);

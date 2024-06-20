@@ -38,10 +38,6 @@ typedef struct BgColors BgColors;
  * Node types for the Abstract Syntax Tree (AST).
  */
 
-struct Constant {
-	int value;
-};
-
 struct Program {
 	Automata* automata;
     Rule* rule;

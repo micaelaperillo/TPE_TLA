@@ -25,8 +25,6 @@ Expression * ArithmeticExpressionSemanticAction(Expression * leftExpression, Exp
 Expression * FactorExpressionSemanticAction(Factor * factor);
 CheckList * CheckListSemanticAction(Check * check, CheckList * next);
 Automata * AutomataSemanticAction(RuleNumber * ruleNumber, Grid * grid, CheckList * checks);
-Factor * ConstantFactorSemanticAction(Constant * constant);
-Factor * ExpressionFactorSemanticAction(Expression * expression);
 Program * AutomataProgramSemanticAction(CompilerState * compilerState, Automata * automata, Rule * rule);
 Check* CheckSemanticAction(const int x,const int y);
 Rule * RuleSemanticAction(PropertyList * properties);

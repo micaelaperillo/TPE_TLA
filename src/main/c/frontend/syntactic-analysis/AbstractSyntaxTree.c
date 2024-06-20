@@ -16,13 +16,6 @@ void shutdownAbstractSyntaxTreeModule() {
 
 /** PUBLIC FUNCTIONS */
 
-void releaseConstant(Constant * constant) {
-	logDebugging(_logger, "Executing destructor: %s", __FUNCTION__);
-	if (constant != NULL) {
-		free(constant);
-	}
-}
-
 void releaseProgram(Program* program) {
     logDebugging(_logger, "Executing destructor: %s", __FUNCTION__);
     if (program != NULL) {
@@ -114,12 +107,3 @@ void releaseData(Data* data) {
     }
 }
 
-/*
-void releaseProgram(Program * program) {
-	logDebugging(_logger, "Executing destructor: %s", __FUNCTION__);
-	if (program != NULL) {
-		releaseExpression(program->expression);
-		free(program);
-	}
-}
- */
