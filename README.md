@@ -42,7 +42,7 @@ X, Y: Grid size.
 M, N: Which cells should be considered neighbours. A value of (1, 1) will check the lower-right adjacent cell, a value of (-1, 1) will check the lower-left neighbour.
 ```
 
-A list of properties can be found at [Properties](doc/Properties.md).
+A list of properties can be found at [Properties](docs/Properties.md).
 
 The output file can be found at out/automata.py. The following dependencies are required to run the program:
 
