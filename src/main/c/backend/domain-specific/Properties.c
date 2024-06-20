@@ -20,7 +20,7 @@ struct Prop * properties[] = {
         PROP("wrapping", BOOLEAN, 1),
         PROP("min_time_between_updates", INTEGER, 1),
         PROP("color", COLOR_HANDLER, UNDEFINED),
-        PROP("bg_color", COLOR_HANDLER, 2),
+        PROP("bg_color", COLOR_HANDLER, 1),
         NULL
 };
 

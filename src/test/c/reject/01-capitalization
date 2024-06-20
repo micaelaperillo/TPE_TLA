@@ -6,7 +6,7 @@ Automatan't
 
 Rule:
      prop:color = (#FFFFFF, #000FFD, #12DCFF);
-     prop:bg_color = (#000000, #FFFFFF);
+     prop:bg_color = (#000000);
      prop:wrapping = (true);
 Rulen't
 

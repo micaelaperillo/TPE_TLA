@@ -1,3 +1,17 @@
+default_params = {"style_params" :{
+                                    "initial_cells" : [],
+                                    "window_width" : 800,
+                                    "window_height" : 600,
+                                    "wrapping" : "True",
+                                    "min_time_between_updates" : 1,
+                                    "color" : ["#FFFFFF"],
+                                    "bg_color" : "#000000",
+                                    }
+                }
+
+params = {}
+
+
 def help():
     popup = tk.Tk()
     popup.wm_title("Help")
@@ -40,7 +54,13 @@ def calculate_neighbours(state, x, y, rules, dim_x, dim_y, wrapping):
     return neighbours
 
 
+def import_params():
+    params = default_params.copy()
+    params.update(modified_params)
+
 def main():
+
+    import_params()
 
     pygame.init()
 

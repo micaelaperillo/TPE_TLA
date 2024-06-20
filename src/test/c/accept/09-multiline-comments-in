@@ -12,6 +12,6 @@ rule:
      /* this is another comment
      goodbye
      */
-     prop:bg_color = (#000000, #FFFFFF);
+     prop:bg_color = (#000000);
      prop:wrapping = (true);
 rulen't
