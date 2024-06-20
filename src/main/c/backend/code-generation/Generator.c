@@ -1,5 +1,7 @@
 #include "Generator.h"
 #include "../../frontend/syntactic-analysis/BisonParser.h"
+#include <stdlib.h>
+#include <unistd.h>
 
 /* MODULE INTERNAL STATE */
 
@@ -202,7 +204,10 @@ static void _output(const unsigned int indentationLevel, const char * const form
 
 void generate(CompilerState * compilerState) {
 	char cal9kAbsolutePath[1024];
-	getcwd(cal9kAbsolutePath,sizeof(cal9kAbsolutePath));
+	char* path=getcwd(cal9kAbsolutePath,sizeof(cal9kAbsolutePath));
+	if(path==NULL){
+		logError(_logger,"Path couldn't be determined");
+	}
 	strcat(cal9kAbsolutePath,CAL9K_PATHFILE);
 	pyFileMain=fopen(cal9kAbsolutePath,"r");
 
