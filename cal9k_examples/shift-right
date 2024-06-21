@@ -1,0 +1,16 @@
+automata (3,6,2), grid (50, 50):
+     check(0, -1);
+     check(0, 1);
+     check(-1, 0);
+     check(-1, 1);
+     check(-1, -1);
+automatan't
+
+rule:
+     prop:color = (#FFFFFF);
+     prop:bg_color = (#000000);
+     prop:wrapping = (true);
+     prop:window_width = (800);
+     prop:window_height = (600);
+     prop:min_time_between_updates = (1);
+rulen't

@@ -4,17 +4,26 @@ import time
 import tk as tk
 modified_params= {
 	"automata_params" : {
-		"alive":1,
-		"dead":2,
+		"alive":3,
+		"dead":6,
 		"born":1,
 		"rules": {
-			(1, 1)
+			(-1, -1)
+			,(-1, 1)
+			,(-1, 0)
+			,(0, 1)
+			,(0, -1)
 		}
 	},
 	"style_params": {
-		"grid_x":100,
-		"grid_y":10,
-		"window_width" : 1280 , 
+		"grid_x":50,
+		"grid_y":50,
+		"min_time_between_updates" : 1 , 
+		"window_height" : 600 , 
+		"window_width" : 800 , 
+		"wrapping" : True , 
+		"bg_color" : "#000000" , 
+		"color" : [ "#FFFFFF" ] , 
 	}
 }
 default_params = { "style_params" : {
