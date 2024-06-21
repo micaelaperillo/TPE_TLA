@@ -21,6 +21,10 @@ Set the following environment variables to control and configure the behaviour o
 
 
 # Cellular Automata Language 9000
+![Captura de pantalla 2024-06-20 210404](https://github.com/micaelaperillo/CAL_9000/assets/84805291/db1fa641-53f0-4f5d-83d6-b32cd044b383)
+![Captura de pantalla 2024-06-20 210436](https://github.com/micaelaperillo/CAL_9000/assets/84805291/a8a90c56-dd64-474e-b41e-cba63db8cd40)
+![Captura de pantalla 2024-06-20 210246](https://github.com/micaelaperillo/CAL_9000/assets/84805291/084d51ae-6eb0-4b0d-af63-e14e0b3b5fe5)
+![Captura de pantalla 2024-06-20 210328](https://github.com/micaelaperillo/CAL_9000/assets/84805291/1940c3f2-fc58-43c2-829d-7c21baddcaf4)
 
 This project aims to simplify the visual creation of cellular automatas by specifying the following values:
 ```
@@ -66,3 +70,5 @@ Once the simulation is running:
 - Space will toggle pause.
   
 The cells can only be interacted with while paused.
+
+
