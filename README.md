@@ -50,12 +50,16 @@ M, N: Which cells should be considered neighbours. A value of (1, 1) will check 
 A list of properties can be found at [Properties](docs/Properties.md).
 
 The output file can be found at out/automata.py. The following dependencies are required to run the program:
+- `pygame` v2.6.1
+- `numpy` v2.1.1
+- `tk` v0.1.0
 
 ```
 pip install pygame
 pip install numpy
 pip install tk
 ```
+
 After compiling the code (instructions can be found at docs/readme), simply run:
 
 ```

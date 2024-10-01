@@ -10,5 +10,8 @@ sudo apt-get install cmake --yes
 sudo apt-get install flex --yes
 sudo apt-get install gcc --yes
 sudo apt-get install make --yes
+pip3 install pygame 
+pip3 install numpy 
+pip3 install tk 
 
 echo "All done."
