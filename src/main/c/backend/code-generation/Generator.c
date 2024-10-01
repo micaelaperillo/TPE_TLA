@@ -8,7 +8,7 @@
 #define INDENTATION_CHARACTER '\t'
 #define INDENTATION_SIZE 1
 #define PY_FILE_NAME "out/automata.py"
-#define CAL9K_PATHFILE "/utils/cal9k.py"
+#define CAL9K_PATHFILE "/src/main/python/cal9k.py"
 static Logger * _logger = NULL;
 
 FILE* pyFileOutput;
