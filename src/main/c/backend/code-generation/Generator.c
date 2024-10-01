@@ -176,7 +176,10 @@ static void _generatePropertyList(PropertyList * propertyList) {
  * Creates the necessary imports for the program ( ͡° ͜ʖ ͡°)
  */
 static void _generatePrologue(void) {
-	_output(0, "%s","import pygame\nimport numpy as np\nimport time\nimport tk as tk\n");
+	_output(0, "%s","import pygame\n"
+	"import numpy as np\n"
+	"import time\n"
+	"import tk as tk\n");
 }
 
 /**
