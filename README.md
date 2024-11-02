@@ -54,12 +54,6 @@ The output file can be found at out/automata.py. The following dependencies are 
 - `numpy` v2.1.1
 - `tk` v0.1.0
 
-```
-pip install pygame
-pip install numpy
-pip install tk
-```
-
 After compiling the code (instructions can be found at docs/readme), simply run:
 
 ```
